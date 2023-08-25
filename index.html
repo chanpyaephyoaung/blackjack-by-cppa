@@ -1,11 +1,226 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>BlackJack By CPPA</title>
-   </head>
-   <body>
-      <h1>Blackjack</h1>
-   </body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BlackJack By CPPA</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="src/sass/main.scss" />
+
+    <!-- Main JS Script -->
+    <script defer type="module" src="src/js/app.js"></script>
+  </head>
+  <body>
+    <!-- Overlay -->
+    <!-- <div class="overlay">&nbsp;</div> -->
+
+    <!-- Message -->
+    <!-- <div class="message-box message-box--lg">
+      <p class="message">BLACKJACK!</p>
+    </div> -->
+
+    <!-- Main -->
+    <main class="main">
+      <div class="main__top">
+        <header class="header">
+          <button class="btn icon__wrapper">
+            <img src="src/img/rules_icon.png" class="icon" alt="Game rules button" />
+          </button>
+
+          <div class="total-score-container">
+            <span class="total-score-container__value">$5000</span>
+            <img
+              src="src/img/coin.png"
+              class="total-score-container__coin-img"
+              alt="Coin picture"
+            />
+          </div>
+        </header>
+
+        <!-- Dealer Card Deck -->
+        <div class="card__deck card__deck--dealer">
+          <div class="cards cards--dealer">
+            <div class="card card--dealer">
+              <img
+                src="src/img/cards/card--1-1.png"
+                class="card__side card__side--dealer card__side--front"
+              />
+              <img src="src/img/cards/card-back.png" class="card__side card__side--back" />
+            </div>
+
+            <div class="card card--dealer">
+              <img
+                src="src/img/cards/card--11-4.png"
+                class="card__side card__side--dealer card__side--front"
+              />
+              <img
+                src="src/img/cards/card-back.png"
+                class="card__side card__side--dealer card__side--back"
+              />
+            </div>
+
+            <div class="cards__score cards__score--dealer">21</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="main__bottom">
+        <!-- Player Card Deck -- Split View -->
+        <div class="card__deck card__deck--player card__deck--split">
+          <div class="cards__split-wrapper">
+            <div class="cards__split-wrapper__box active">
+              <!-- Result Message -->
+              <div class="message-box message-box--sm">
+                <p class="message">You Win!</p>
+              </div>
+
+              <div class="cards cards--player--sm">
+                <div class="card card--player--sm">
+                  <img
+                    src="src/img/cards/card--1-1.png"
+                    class="card__side card__side--player--sm card__side--front"
+                  />
+                  <img
+                    src="src/img/cards/card-back.png"
+                    class="card__side card__side--player--sm card__side--back"
+                  />
+                </div>
+
+                <div class="card card--player--sm">
+                  <img
+                    src="src/img/cards/card--11-3.png"
+                    class="card__side card__side--player--sm card__side--front"
+                  />
+                  <img
+                    src="src/img/cards/card-back.png"
+                    class="card__side card__side--player--sm card__side--back"
+                  />
+                </div>
+
+                <div class="cards__score cards__score--player--sm">21</div>
+              </div>
+            </div>
+
+            <div class="bet-area__total bet-area__total--sm">$50</div>
+          </div>
+
+          <div class="cards__split-wrapper">
+            <div class="cards__split-wrapper__box">
+              <!-- Result Message -->
+              <div class="message-box message-box--sm">
+                <p class="message">You Win!</p>
+              </div>
+              <div class="cards cards--player--sm">
+                <div class="card card--player--sm">
+                  <img
+                    src="src/img/cards/card--1-1.png"
+                    class="card__side card__side--player--sm card__side--front"
+                  />
+                  <img
+                    src="src/img/cards/card-back.png"
+                    class="card__side card__side--player--sm card__side--back"
+                  />
+                </div>
+
+                <div class="card card--player--sm">
+                  <img
+                    src="src/img/cards/card--11-3.png"
+                    class="card__side card__side--player--sm card__side--front"
+                  />
+                  <img
+                    src="src/img/cards/card-back.png"
+                    class="card__side card__side--player--sm card__side--back"
+                  />
+                </div>
+
+                <div class="cards__score cards__score--player--sm">21</div>
+              </div>
+            </div>
+
+            <div class="bet-area__total bet-area__total--sm">$50</div>
+          </div>
+        </div>
+
+        <!-- Player Card Deck -->
+        <!-- <div class="card__deck card__deck--player">
+          <div class="cards cards--player">
+            <div class="card card--player">
+              <img
+                src="src/img/cards/card--1-1.png"
+                class="card__side card__side--player card__side--front"
+              />
+              <img
+                src="src/img/cards/card-back.png"
+                class="card__side card__side--player card__side--back"
+              />
+            </div>
+
+            <div class="card card--player">
+              <img
+                src="src/img/cards/card--11-4.png"
+                class="card__side card__side--player card__side--front"
+              />
+              <img
+                src="src/img/cards/card-back.png"
+                class="card__side card__side--player card__side--back"
+              />
+            </div>
+
+            <div class="cards__score cards__score--player">21</div>
+          </div>
+        </div> -->
+
+        <!-- Play Area -->
+        <div class="player__controls">
+          <div class="player__controls__left">
+            <button class="btn btn--secondary">Split</button>
+            <button class="btn btn--secondary btn--text-sm">Double Down</button>
+          </div>
+
+          <div class="player__controls__middle">
+            <div class="bet-area">
+              <div class="bet-area__total bet-area__total--lg">$50</div>
+              <div class="bet-area__box">
+                <img src="src/img/chips/Casino Chip-100k.png" class="chip chip--small" alt="" />
+              </div>
+            </div>
+          </div>
+
+          <div class="player__controls__right">
+            <button class="btn btn--primary">Bet</button>
+            <button class="btn btn--danger">Stand</button>
+          </div>
+        </div>
+
+        <!-- Chips Container -->
+        <div class="chips-container__wrapper">
+          <div class="chips-container">
+            <span class="chips-container__navigator chips-container__navigator--left">&nbsp;</span>
+            <span class="chips-container__navigator chips-container__navigator--right">&nbsp;</span>
+            <img src="src/img/chips/Casino Chip-5.png" class="chip chip--regular" alt="" />
+            <img src="src/img/chips/Casino Chip-5.png" class="chip chip--regular" alt="" />
+            <img src="src/img/chips/Casino Chip-5.png" class="chip chip--regular" alt="" />
+            <img src="src/img/chips/Casino Chip-5.png" class="chip chip--regular" alt="" />
+            <img src="src/img/chips/Casino Chip-5.png" class="chip chip--regular" alt="" />
+            <img src="src/img/chips/Casino Chip-5.png" class="chip chip--regular" alt="" />
+            <img src="src/img/chips/Casino Chip-5.png" class="chip chip--regular" alt="" />
+            <img src="src/img/chips/Casino Chip-5.png" class="chip chip--regular" alt="" />
+            <img src="src/img/chips/Casino Chip-5.png" class="chip chip--regular" alt="" />
+            <img src="src/img/chips/Casino Chip-5.png" class="chip chip--regular" alt="" />
+            <img src="src/img/chips/Casino Chip-5.png" class="chip chip--regular" alt="" />
+            <img src="src/img/chips/Casino Chip-5.png" class="chip chip--regular" alt="" />
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
 </html>

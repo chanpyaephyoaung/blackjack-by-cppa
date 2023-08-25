@@ -1,0 +1,32 @@
+@use "../abstracts" as *;
+
+.player__controls {
+  display: grid;
+  grid-template-columns: 30% 1fr 30%;
+  margin-bottom: 1rem;
+
+  &__left,
+  &__right {
+    display: grid;
+    grid-template-columns: auto;
+    row-gap: 1.5rem;
+    align-self: end;
+  }
+
+  &__left {
+    justify-items: start;
+    grid-column: 1;
+    margin-right: auto;
+  }
+
+  &__middle {
+    justify-self: center;
+    grid-column: 2 / 3;
+  }
+
+  &__right {
+    grid-column: 3 / -1;
+    justify-items: center;
+    margin-left: auto;
+  }
+}

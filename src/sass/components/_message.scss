@@ -1,0 +1,26 @@
+@use "../abstracts" as *;
+
+.message-box {
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  text-align: center;
+
+  background-color: $color-gray-faded-1;
+  color: $color-white;
+
+  &--lg {
+    font-size: $fs-largest;
+    font-weight: $fw-semi-bold;
+    padding: 2rem;
+  }
+
+  &--sm {
+    font-size: $fs-small;
+    font-weight: $fw-semi-bold;
+    padding: 0.5rem;
+  }
+}

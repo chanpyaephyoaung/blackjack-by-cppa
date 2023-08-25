@@ -1,0 +1,53 @@
+@use "../abstracts" as *;
+
+.bet-area {
+  display: grid;
+  row-gap: 1rem;
+
+  &__box {
+    width: $bet-area-dimension-lg;
+    height: $bet-area-dimension-lg;
+    background-color: $color-gray-faded-3;
+    border: $border-size-small solid $color-gray-faded-2;
+    border-radius: $border-radius-circle;
+
+    display: grid;
+    place-content: center;
+    position: relative;
+  }
+
+  &__total {
+    font-weight: $fw-medium;
+    background-color: $color-gray-faded-3;
+    color: $color-white;
+    text-align: center;
+    border-radius: $border-radius-rounded;
+    border: $border-size-small solid $color-gray-faded-2;
+    position: relative;
+
+    &--lg {
+      min-width: $bet-area-dimension-lg;
+      font-size: $fs-regular;
+      padding: 0.5rem;
+    }
+
+    &--sm {
+      min-width: $bet-area-dimension-sm;
+      font-size: $fs-small;
+      padding: 0.3rem;
+    }
+
+    &--lg::after {
+      content: "";
+      display: block;
+      min-width: $total_bet_arrow_dimension;
+      height: $total_bet_arrow_dimension;
+      clip-path: polygon(0 0, 100% 0, 50% 100%, 0 0);
+      background-color: $color-gray-faded-3;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: -$total_bet_arrow_dimension;
+    }
+  }
+}

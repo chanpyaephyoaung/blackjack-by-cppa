@@ -1,0 +1,23 @@
+$header-height: 3.4375rem;
+
+$card-dimension-ratio: 363 / 250;
+$card-length-lg: 5.5rem;
+$card-height-lg: calc($card-length-lg * $card-dimension-ratio);
+
+$card-length-md: 5rem;
+$card-height-md: calc($card-length-md * $card-dimension-ratio);
+
+$card-length-sm: 4rem;
+$card-height-sm: calc($card-length-sm * $card-dimension-ratio);
+
+$card-score-dimension-lg: 2rem;
+$card-score-dimension-md: 1.8rem;
+$card-score-dimension-sm: 1.5rem;
+
+$bet-area-dimension-lg: 7.3rem;
+$bet-area-dimension-sm: 5rem;
+
+$chips-container-height: 4rem;
+$chip-dimension-regular: 3rem;
+$chip-dimension-sm: 1.8rem;
+$total_bet_arrow_dimension: 1rem;

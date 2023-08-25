@@ -1,0 +1,137 @@
+@use "../abstracts" as *;
+
+.card__deck {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  position: relative;
+
+  &--player {
+    margin-bottom: 1rem;
+  }
+
+  &--dealer {
+    margin-top: 2.5rem;
+  }
+
+  &--split {
+    column-gap: 2rem;
+  }
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  position: relative;
+
+  &__split-wrapper {
+    display: grid;
+    row-gap: 0.5rem;
+
+    &__box {
+      padding: 1rem 2rem;
+      background-color: $color-gray-faded-3;
+      border-radius: $border-radius-small;
+      position: relative;
+
+      &.active {
+        box-shadow: inset 0 0 0 $border-size-default $color-primary;
+      }
+    }
+  }
+
+  &__score {
+    font-weight: $fw-medium;
+    border-radius: $border-radius-circle;
+    background-color: $color-black;
+    color: $color-white;
+
+    display: grid;
+    place-content: center;
+
+    position: absolute;
+    top: -1rem;
+    right: -1rem;
+    z-index: 10;
+
+    &--player {
+      font-size: $fs-regular;
+      width: $card-score-dimension-lg;
+      height: $card-score-dimension-lg;
+
+      &--sm {
+        font-size: $fs-smallest;
+        width: $card-score-dimension-sm;
+        height: $card-score-dimension-sm;
+      }
+    }
+
+    &--dealer {
+      font-size: $fs-small;
+      width: $card-score-dimension-md;
+      height: $card-score-dimension-md;
+    }
+  }
+}
+
+.card {
+  perspective: 150rem;
+  -moz-perspective: 150rem;
+  position: relative;
+
+  &--player {
+    width: $card-length-lg;
+    height: $card-height-lg;
+
+    &:not(:first-child) {
+      margin-left: calc(($card-length-lg - 0.7rem) * -1);
+    }
+
+    &--sm {
+      width: $card-length-sm;
+      height: $card-height-sm;
+
+      &:not(:first-child) {
+        margin-left: calc(($card-length-sm - 0.7rem) * -1);
+      }
+    }
+  }
+
+  &--dealer {
+    width: $card-length-md;
+    height: $card-height-md;
+
+    &:not(:first-child) {
+      margin-left: calc(($card-length-md - 0.7rem) * -1);
+    }
+  }
+
+  &__side {
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+    transition: all 0.8s ease;
+
+    &--player {
+      width: $card-length-lg;
+      height: $card-height-lg;
+
+      &--sm {
+        width: $card-length-sm;
+        height: $card-height-sm;
+      }
+    }
+
+    &--dealer {
+      width: $card-length-md;
+      height: $card-height-md;
+    }
+
+    &--back {
+      transform: rotateY(180deg);
+    }
+  }
+}

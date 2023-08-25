@@ -1,0 +1,12 @@
+@use "../abstracts" as *;
+
+.icon__wrapper {
+   width: $header-height;
+   height: $header-height;
+   padding: 0.5rem;
+   background-color: $color-gray-faded-2;
+
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
