@@ -11,3 +11,18 @@ $fw-semi-bold: 600;
 $fw-medium: 500;
 $fw-regular: 400;
 $fw-light: 300;
+
+.heading--secondary {
+  font-size: $fs-medium;
+  font-weight: $fw-semi-bold;
+}
+
+.heading--tertiary {
+  font-size: $fs-regular;
+  font-weight: $fw-medium;
+}
+
+.paragraph {
+  font-size: $fs-smallest;
+  font-weight: $fw-regular;
+}
