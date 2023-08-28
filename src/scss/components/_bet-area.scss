@@ -1,12 +1,15 @@
 @use "../abstracts" as *;
 
 .bet-area {
+  --bet-area-dimension-lg: 7.3rem;
+  --bet-area-dimension-sm: 5rem;
+
   display: grid;
   row-gap: 1rem;
 
   &__box {
-    width: $bet-area-dimension-lg;
-    height: $bet-area-dimension-lg;
+    width: var(--bet-area-dimension-lg);
+    height: var(--bet-area-dimension-lg);
     background-color: $color-gray-faded-3;
     border: $border-size-small solid $color-gray-faded-2;
     border-radius: $border-radius-circle;
@@ -26,28 +29,28 @@
     position: relative;
 
     &--lg {
-      min-width: $bet-area-dimension-lg;
-      font-size: $fs-regular;
+      min-width: var(--bet-area-dimension-lg);
+      font-size: 1.125rem;
       padding: 0.5rem;
     }
 
     &--sm {
-      min-width: $bet-area-dimension-sm;
-      font-size: $fs-small;
+      min-width: var(--bet-area-dimension-sm);
+      font-size: 1rem;
       padding: 0.3rem;
     }
 
     &--lg::after {
       content: "";
       display: block;
-      min-width: $total_bet_arrow_dimension;
-      height: $total_bet_arrow_dimension;
+      min-width: 1rem;
+      height: 1rem;
       clip-path: polygon(0 0, 100% 0, 50% 100%, 0 0);
       background-color: $color-gray-faded-3;
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
-      bottom: -$total_bet_arrow_dimension;
+      bottom: -1rem;
     }
   }
 }

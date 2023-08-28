@@ -1,11 +1,15 @@
 @use "../abstracts" as *;
 
 .modal {
+  --modal-width: 37.5rem;
+  --modal-height: 70vh;
+  --modal-padding: 1.5rem;
+
   width: 90%;
-  max-width: $modal-width;
-  height: $modal-height;
+  max-width: var(--modal-width);
+  height: var(--modal-height);
   overflow-y: scroll;
-  padding: $modal-padding;
+  padding: var(--modal-padding);
   position: absolute;
   top: 50%;
   left: 50%;
@@ -15,11 +19,11 @@
   z-index: 200;
 
   &__close-icon {
-    font-size: $fs-largest;
+    font-size: 2.125rem;
     line-height: 0.8;
     position: absolute;
-    top: $modal-padding;
-    right: $modal-padding;
+    top: var(--modal-padding);
+    right: var(--modal-padding);
     cursor: pointer;
   }
 

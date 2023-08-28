@@ -1,0 +1,44 @@
+@use "../abstracts" as *;
+
+.header {
+  --header-height: 3.4375rem;
+
+  width: 100%;
+  height: var(--header-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__icon {
+    width: var(--header-height);
+    height: var(--header-height);
+    padding: 0.5rem;
+    background-color: $color-gray-faded-2;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.total-score-container {
+  width: 60%;
+  height: 100%;
+  background-color: $color-gray-faded-2;
+  color: $color-white;
+  font-size: 1.4375rem;
+  font-weight: $fw-medium;
+  border-radius: $border-radius-rounded;
+
+  display: grid;
+  place-content: center;
+  position: relative;
+
+  &__coin-img {
+    width: calc(var(--header-height) * 0.9);
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(-50%, -50%);
+  }
+}
