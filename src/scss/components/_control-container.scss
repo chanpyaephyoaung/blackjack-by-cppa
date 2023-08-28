@@ -1,0 +1,40 @@
+@use "../abstracts" as *;
+
+.control-container__wrapper {
+  --container-height: 3.5rem;
+
+  width: 100%;
+  height: var(--container-height);
+  padding: 0 2.5rem;
+  border: $border-size-default solid $color-white;
+  border-radius: $border-radius-lg;
+  background-color: $color-gray-faded-3;
+  color: $color-white;
+  position: relative;
+
+  @include respond(tab-port) {
+    --container-height: 4.5rem;
+  }
+}
+
+.control-container {
+  width: 100%;
+  height: 100%;
+  padding: 0.5rem 0;
+  display: flex;
+  align-items: center;
+
+  &--x-center {
+    justify-content: center;
+  }
+
+  &--x-overflow {
+    column-gap: 0.7rem;
+    overflow-x: scroll;
+
+    &::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
+  }
+}

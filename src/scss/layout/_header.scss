@@ -29,9 +29,6 @@
   width: 60%;
   height: 100%;
   background-color: $color-gray-faded-2;
-  color: $color-white;
-  font-size: 1.375rem;
-  font-weight: $fw-medium;
   border-radius: $border-radius-rounded;
 
   display: grid;
@@ -39,7 +36,11 @@
   position: relative;
 
   @include respond(tab-port) {
-    font-size: 1.625rem;
+    width: 50%;
+  }
+
+  @include respond(tab-land) {
+    width: 40%;
   }
 
   &__coin-img {

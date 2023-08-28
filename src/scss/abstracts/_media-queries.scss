@@ -23,18 +23,18 @@ $breakpoint argument choices:
     } //600px
   }
   @if $breakpoint == tab-port {
-    @media only screen and (min-width: 56.25em) {
+    @media only screen and (min-width: 46.875em) {
       @content;
-    } //900px
+    } //750px
   }
   @if $breakpoint == tab-land {
-    @media only screen and (min-width: 75em) {
+    @media only screen and (min-width: 68.75em) {
       @content;
-    } //1200px
+    } //1100px
   }
   @if $breakpoint == big-desktop {
-    @media only screen and (min-width: 112.5em) {
+    @media only screen and (min-width: 100em) {
       @content;
-    } //1800px
+    } //1600px
   }
 }

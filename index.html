@@ -43,7 +43,7 @@
 
     <!-- Message -->
     <!-- <div class="message-box message-box--lg">
-      <p class="message">BLACKJACK!</p>
+      <span class="message heading--message--lg">BLACKJACK!</span>
     </div> -->
 
     <!-- Main -->
@@ -55,7 +55,7 @@
           </button>
 
           <div class="total-score-container">
-            <span class="total-score-container__value">$5000</span>
+            <span class="heading--container total-score-container__value">$5000</span>
             <img
               src="src/img/coin.png"
               class="total-score-container__coin-img"
@@ -97,7 +97,7 @@
           <div class="cards__split-wrapper">
             <div class="cards__split-wrapper__box active">
               <div class="message-box message-box--sm">
-                <p class="message">You Win!</p>
+                <span class="message heading--message--sm">You Win!</span>
               </div>
 
               <div class="cards cards--player--sm">
@@ -133,7 +133,7 @@
           <div class="cards__split-wrapper">
             <div class="cards__split-wrapper__box">
               <div class="message-box message-box--sm">
-                <p class="message">You Win!</p>
+                <span class="message heading--message--sm">You Win!</span>
               </div>
               <div class="cards cards--player--sm">
                 <div class="card card--player--sm">
@@ -206,7 +206,21 @@
             <div class="bet-area">
               <div class="bet-area__total bet-area__total--lg">$50</div>
               <div class="bet-area__box">
-                <img src="src/img/chips/Casino Chip-100k.png" class="chip chip--small" alt="" />
+                <img
+                  src="src/img/chips/Casino Chip-100k.png"
+                  class="chip chip--small bet-area__box__chips"
+                  alt=""
+                />
+                <img
+                  src="src/img/chips/Casino Chip-100k.png"
+                  class="chip chip--small bet-area__box__chips"
+                  alt=""
+                />
+                <img
+                  src="src/img/chips/Casino Chip-100k.png"
+                  class="chip chip--small bet-area__box__chips"
+                  alt=""
+                />
               </div>
             </div>
           </div>
@@ -217,23 +231,40 @@
           </div>
         </div>
 
-        <!-- Chips Container -->
-        <div class="chips-container__wrapper">
-          <div class="chips-container">
-            <span class="chips-container__navigator chips-container__navigator--left">&nbsp;</span>
-            <span class="chips-container__navigator chips-container__navigator--right">&nbsp;</span>
-            <img src="src/img/chips/Casino Chip-5.png" class="chip chip--regular" alt="" />
-            <img src="src/img/chips/Casino Chip-5.png" class="chip chip--regular" alt="" />
-            <img src="src/img/chips/Casino Chip-5.png" class="chip chip--regular" alt="" />
-            <img src="src/img/chips/Casino Chip-5.png" class="chip chip--regular" alt="" />
-            <img src="src/img/chips/Casino Chip-5.png" class="chip chip--regular" alt="" />
-            <img src="src/img/chips/Casino Chip-5.png" class="chip chip--regular" alt="" />
-            <img src="src/img/chips/Casino Chip-5.png" class="chip chip--regular" alt="" />
-            <img src="src/img/chips/Casino Chip-5.png" class="chip chip--regular" alt="" />
-            <img src="src/img/chips/Casino Chip-5.png" class="chip chip--regular" alt="" />
-            <img src="src/img/chips/Casino Chip-5.png" class="chip chip--regular" alt="" />
-            <img src="src/img/chips/Casino Chip-5.png" class="chip chip--regular" alt="" />
-            <img src="src/img/chips/Casino Chip-5.png" class="chip chip--regular" alt="" />
+        <!-- Bet Area Controls -->
+        <div class="bet__controls">
+          <!-- Total Bet Display Container  -->
+          <div class="bet__controls__left">
+            <span class="heading--container">Total Bet:</span>
+            <div class="control-container__wrapper">
+              <div class="control-container control-container--x-center">
+                <span class="heading--container">$50</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chips Container -->
+          <div class="control-container__wrapper bet__controls__right">
+            <div class="control-container control-container--x-overflow">
+              <span class="chips-container__navigator chips-container__navigator--left"
+                >&nbsp;</span
+              >
+              <span class="chips-container__navigator chips-container__navigator--right"
+                >&nbsp;</span
+              >
+              <img src="src/img/chips/Casino Chip-5.png" class="chip chip--regular" alt="" />
+              <img src="src/img/chips/Casino Chip-5.png" class="chip chip--regular" alt="" />
+              <img src="src/img/chips/Casino Chip-5.png" class="chip chip--regular" alt="" />
+              <img src="src/img/chips/Casino Chip-5.png" class="chip chip--regular" alt="" />
+              <img src="src/img/chips/Casino Chip-5.png" class="chip chip--regular" alt="" />
+              <img src="src/img/chips/Casino Chip-5.png" class="chip chip--regular" alt="" />
+              <img src="src/img/chips/Casino Chip-5.png" class="chip chip--regular" alt="" />
+              <img src="src/img/chips/Casino Chip-5.png" class="chip chip--regular" alt="" />
+              <img src="src/img/chips/Casino Chip-5.png" class="chip chip--regular" alt="" />
+              <img src="src/img/chips/Casino Chip-5.png" class="chip chip--regular" alt="" />
+              <img src="src/img/chips/Casino Chip-5.png" class="chip chip--regular" alt="" />
+              <img src="src/img/chips/Casino Chip-5.png" class="chip chip--regular" alt="" />
+            </div>
           </div>
         </div>
       </div>

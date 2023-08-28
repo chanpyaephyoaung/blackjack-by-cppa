@@ -5,8 +5,8 @@
   &:link,
   &:visited {
     display: inline-block;
-    height: 2.7rem;
-    font-size: 1.125rem;
+    height: 2.5rem;
+    font-size: 1rem;
     font-weight: $fw-bold;
     padding: 0.625rem 1.5625rem;
     border: none;
@@ -14,6 +14,8 @@
     text-decoration: none;
     cursor: pointer;
     transition: all 0.2s;
+    position: relative;
+    z-index: 10;
 
     @include respond(tab-port) {
       height: 3.5rem;
@@ -34,7 +36,7 @@
   }
 
   &--text-sm {
-    font-size: 1rem;
+    font-size: 0.85rem;
 
     display: grid;
     place-content: center;

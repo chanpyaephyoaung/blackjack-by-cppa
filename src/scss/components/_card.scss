@@ -9,6 +9,10 @@
 
   &--player {
     margin-bottom: 1rem;
+
+    @include respond(tab-land) {
+      margin-bottom: -3rem;
+    }
   }
 
   &--dealer {
@@ -37,6 +41,10 @@
 
       @include respond(tab-port) {
         padding: 1.5rem 2.5rem;
+      }
+
+      @include respond(tab-land) {
+        padding: 1.5rem;
       }
 
       &.active {

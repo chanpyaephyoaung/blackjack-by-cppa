@@ -1,7 +1,10 @@
 @use "../abstracts/media-queries" as *;
+@use "../abstracts/colors" as clr;
 
 // FONT SIZES
-/* 38 - 2.375
+/* 
+   42 - 2.625
+   38 - 2.375
    34 - 2.125
    32 - 2
    28 - 1.75
@@ -34,6 +37,40 @@ $fw-light: 300;
 
   @include respond(tab-port) {
     font-size: 1.375rem;
+  }
+}
+
+.heading--container {
+  color: clr.$color-white;
+  font-size: 1.375rem;
+  font-weight: $fw-semi-bold;
+
+  @include respond(tab-port) {
+    font-size: 1.625rem;
+  }
+}
+
+.heading--message {
+  &--lg {
+    font-size: 2.125rem;
+    font-weight: $fw-semi-bold;
+
+    @include respond(tab-port) {
+      font-size: 2.375rem;
+    }
+
+    @include respond(tab-land) {
+      font-size: 2.625rem;
+    }
+  }
+
+  &--sm {
+    font-size: 1rem;
+    font-weight: $fw-semi-bold;
+
+    @include respond(tab-port) {
+      padding: 0.8rem;
+    }
   }
 }
 

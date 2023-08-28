@@ -18,7 +18,7 @@
   }
 
   &__left {
-    justify-items: center;
+    justify-items: start;
     grid-column: 1;
     margin-right: auto;
   }
@@ -26,11 +26,16 @@
   &__middle {
     justify-self: center;
     grid-column: 2 / 3;
+
+    @include respond(tab-land) {
+      position: absolute;
+      bottom: var(--body-padding-y);
+    }
   }
 
   &__right {
     grid-column: 3 / -1;
-    justify-items: center;
+    justify-items: end;
     margin-left: auto;
   }
 }
