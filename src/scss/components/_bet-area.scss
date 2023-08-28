@@ -3,9 +3,16 @@
 .bet-area {
   --bet-area-dimension-lg: 7.3rem;
   --bet-area-dimension-sm: 5rem;
+  --bet-area-total-arrow-dimension: 1rem;
 
   display: grid;
-  row-gap: 1rem;
+  justify-items: center;
+  row-gap: var(--bet-area-total-arrow-dimension);
+
+  @include respond(tab-port) {
+    --bet-area-dimension-lg: 10rem;
+    --bet-area-total-arrow-dimension: 1.5rem;
+  }
 
   &__box {
     width: var(--bet-area-dimension-lg);
@@ -31,26 +38,35 @@
     &--lg {
       min-width: var(--bet-area-dimension-lg);
       font-size: 1.125rem;
-      padding: 0.5rem;
+      padding: 0.5rem 1rem;
+
+      @include respond(tab-port) {
+        font-size: 1.375rem;
+      }
     }
 
     &--sm {
       min-width: var(--bet-area-dimension-sm);
       font-size: 1rem;
       padding: 0.3rem;
+
+      @include respond(tab-port) {
+        font-size: 1.125rem;
+        padding: 0.6rem;
+      }
     }
 
     &--lg::after {
       content: "";
       display: block;
-      min-width: 1rem;
-      height: 1rem;
+      min-width: var(--bet-area-total-arrow-dimension);
+      height: var(--bet-area-total-arrow-dimension);
       clip-path: polygon(0 0, 100% 0, 50% 100%, 0 0);
       background-color: $color-gray-faded-3;
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
-      bottom: -1rem;
+      bottom: calc(var(--bet-area-total-arrow-dimension) * -1);
     }
   }
 }

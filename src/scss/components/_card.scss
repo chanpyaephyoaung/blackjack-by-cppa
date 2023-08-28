@@ -35,6 +35,10 @@
       border-radius: $border-radius-small;
       position: relative;
 
+      @include respond(tab-port) {
+        padding: 1.5rem 2.5rem;
+      }
+
       &.active {
         box-shadow: inset 0 0 0 $border-size-default $color-primary;
       }
@@ -59,6 +63,12 @@
     right: -1rem;
     z-index: 10;
 
+    @include respond(tab-port) {
+      --card-score-dimension-lg: 2.125rem;
+      --card-score-dimension-md: 1.9rem;
+      --card-score-dimension-sm: 1.8rem;
+    }
+
     &--player {
       font-size: 1.125rem;
       width: var(--card-score-dimension-lg);
@@ -68,6 +78,10 @@
         font-size: 0.75rem;
         width: var(--card-score-dimension-sm);
         height: var(--card-score-dimension-sm);
+
+        @include respond(tab-port) {
+          font-size: 1rem;
+        }
       }
     }
 
@@ -87,19 +101,25 @@
   --card-length-md: 5rem;
   --card-height-md: calc(var(--card-length-md) * var(--card-dimension-ratio));
 
-  --card-length-sm: 5rem;
+  --card-length-sm: 4rem;
   --card-height-sm: calc(var(--card-length-sm) * var(--card-dimension-ratio));
 
   perspective: 150rem;
   -moz-perspective: 150rem;
   position: relative;
 
+  @include respond(tab-port) {
+    --card-length-lg: 6.2rem;
+    --card-length-md: 5.5rem;
+    --card-length-sm: 5rem;
+  }
+
   &--player {
     width: var(--card-length-lg);
     height: var(--card-height-lg);
 
     &:not(:first-child) {
-      margin-left: calc((var(--card-length-lg) - 0.7rem) * -1);
+      margin-left: calc((var(--card-length-lg) - 0.75rem) * -1);
     }
 
     &--sm {
