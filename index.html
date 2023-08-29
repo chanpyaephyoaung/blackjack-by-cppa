@@ -24,33 +24,37 @@
     <!-- <div class="overlay">&nbsp;</div> -->
 
     <!-- Modal -->
-    <!-- <div class="modal modal--game-rules">
-      <span class="modal__close-icon">&#215;</span>
-      <h2 class="heading--secondary">BlackJack Rules</h2>
+    <div class="position-center-xy width--100 z-index--200 hidden">
+      <div class="modal modal--game-rules">
+        <span class="modal__close-icon modal__close-icon--game-rules">&#215;</span>
+        <h2 class="heading--secondary">BlackJack Rules</h2>
 
-      <div class="modal--game-rules__section">
-        <h3 class="heading--tertiary">The Pack</h3>
-        <p class="paragraph">
-          The standard 52-card pack is used, but in most casinos several decks of cards are shuffled
-          together. The six-deck game (312 cards) is the most popular. In addition, the dealer uses
-          a blank plastic card, which is never dealt, but is placed toward the bottom of the pack to
-          indicate when it will be time for the cards to be reshuffled. When four or more decks are
-          used, they are dealt from a shoe (a box that allows the dealer to remove cards one at a
-          time, face down, without actually holding one or more packs).
-        </p>
+        <div class="modal--game-rules__section">
+          <h3 class="heading--tertiary">The Pack</h3>
+          <p class="paragraph">
+            The standard 52-card pack is used, but in most casinos several decks of cards are
+            shuffled together. The six-deck game (312 cards) is the most popular. In addition, the
+            dealer uses a blank plastic card, which is never dealt, but is placed toward the bottom
+            of the pack to indicate when it will be time for the cards to be reshuffled. When four
+            or more decks are used, they are dealt from a shoe (a box that allows the dealer to
+            remove cards one at a time, face down, without actually holding one or more packs).
+          </p>
+        </div>
       </div>
-    </div> -->
+    </div>
 
     <!-- Message -->
-    <!-- <div class="message-box message-box--lg">
-      <span class="message heading--message--lg">BLACKJACK!</span>
+    <!-- <div class="position-center-xy width--100 z-index--100">
+      <div class="message-box message-box--lg message-box--final-result">
+        <span class="message heading--message--lg">BLACKJACK!</span>
+      </div>
     </div> -->
 
     <!-- Main -->
     <main class="main">
       <div class="main__top">
         <header class="header">
-          <button class="header__icon btn">
+          <button class="header__icon header__icon--game-rules btn">
             <img src="src/img/rules_icon.png" class="icon" alt="Game rules button" />
           </button>
 
@@ -183,11 +187,11 @@
             <div class="card card--player">
               <img
                 src="src/img/cards/card--11-4.png"
-                class="card__side card__side--player card__side--front"
+                class="card__side card__side--player card__side--front card__side--player--front"
               />
               <img
                 src="src/img/cards/card-back.png"
-                class="card__side card__side--player card__side--back"
+                class="card__side card__side--player card__side--back card__side--player--back"
               />
             </div>
 
@@ -198,8 +202,10 @@
         <!-- Play Area -->
         <div class="player__controls">
           <div class="player__controls__left">
-            <button class="btn btn--secondary">Split</button>
-            <button class="btn btn--secondary btn--text-sm">Double Down</button>
+            <button class="btn btn--secondary btn--play btn--split">Split</button>
+            <button class="btn btn--secondary btn--text-sm btn--play btn--double-down">
+              Double Down
+            </button>
           </div>
 
           <div class="player__controls__middle">
@@ -226,8 +232,8 @@
           </div>
 
           <div class="player__controls__right">
-            <button class="btn btn--primary">Bet</button>
-            <button class="btn btn--danger">Stand</button>
+            <button class="btn btn--primary btn--play btn--bet">Bet</button>
+            <button class="btn btn--danger btn--play btn--stand">Stand</button>
           </div>
         </div>
 

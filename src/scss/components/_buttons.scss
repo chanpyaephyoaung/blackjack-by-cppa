@@ -35,6 +35,10 @@
     box-shadow: $box-shadow-1;
   }
 
+  &--play {
+    // animation: display_upwards_play_btns 0.3s ease-in forwards;
+  }
+
   &--text-sm {
     font-size: 0.85rem;
 

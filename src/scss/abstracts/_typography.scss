@@ -3,6 +3,8 @@
 
 // FONT SIZES
 /* 
+   52 - 3.25
+   46 - 2.875
    42 - 2.625
    38 - 2.375
    34 - 2.125
@@ -53,14 +55,15 @@ $fw-light: 300;
 .heading--message {
   &--lg {
     font-size: 2.125rem;
-    font-weight: $fw-semi-bold;
+    font-weight: $fw-bold;
+    -webkit-text-stroke: 2px black;
 
     @include respond(tab-port) {
       font-size: 2.375rem;
     }
 
     @include respond(tab-land) {
-      font-size: 2.625rem;
+      font-size: 3.25rem;
     }
   }
 

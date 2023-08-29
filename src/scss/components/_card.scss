@@ -156,6 +156,7 @@
     left: 0;
     backface-visibility: hidden;
     transition: all 0.8s ease;
+    animation: cardFront--toFront 0.3s ease-in forwards;
 
     &--player {
       width: var(--card-length-lg);
@@ -173,7 +174,8 @@
     }
 
     &--back {
-      transform: rotateY(180deg);
+      // transform: rotateY(180deg);
+      animation: cardBack--toBack 0.3s ease-in forwards;
     }
   }
 }
