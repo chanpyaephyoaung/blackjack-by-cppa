@@ -1,13 +1,10 @@
 import gameRulesModalView from "./views/modal/gameRulesModalView";
-import { chipsList } from "./models/chipsmodel";
-import chipView from "./views/chips/chipView";
-
-const controlBetChipsList = () => {
-  chipView.render(chipsList);
-};
+import chipsListContainerView from "./views/chips/chipsListContainerView";
+import chipsListView from "./views/chips/chipsListView";
+import { controlBetChipsList } from "./controllers/chipsControllers";
 
 const init = () => {
-  chipView.addHandlerRender(controlBetChipsList);
+  chipsListView.addHandlerRender(controlBetChipsList);
 };
 
 init();

@@ -1,6 +1,6 @@
 import View from "../View";
 
-class ChipView extends View {
+class ChipsListView extends View {
   _containerEl = document.querySelector(".chips__container");
   _options = {
     clearBeforeAdding: false,
@@ -23,4 +23,4 @@ class ChipView extends View {
   }
 }
 
-export default new ChipView();
+export default new ChipsListView();
