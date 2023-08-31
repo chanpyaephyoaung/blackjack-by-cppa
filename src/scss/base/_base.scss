@@ -25,7 +25,7 @@ body {
   height: 100vh;
   height: 100svh;
   overflow-x: hidden;
-  background: url(../img/bg/bg-mobile.jpg);
+  background: url(../../static/img/bg/bg-mobile.jpg);
   background-size: cover;
   background-position: center;
 
@@ -34,7 +34,7 @@ body {
   position: relative;
 
   @include respond(tab-port) {
-    background: url(../img/bg/bg-desktop.jpg);
+    background: url(../../static/img/bg/bg-desktop.jpg);
     background-size: cover;
     background-position: center;
   }

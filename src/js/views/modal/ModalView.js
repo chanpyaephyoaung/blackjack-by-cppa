@@ -20,7 +20,6 @@ export default class ModalView extends View {
   }
 
   _addHandlerShowModal() {
-    console.log("Modal opened!");
     this._btnOpenModal.addEventListener("click", this.showModal.bind(this));
   }
 
