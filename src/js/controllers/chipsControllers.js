@@ -1,5 +1,6 @@
 import chipsListView from "../views/chips/chipsListView";
 import betAreaView from "../views/betArea/betAreaView";
+import totalBetView from "../views/totalBet/totalBetView";
 import { chipsList } from "../models/chipsmodel";
 import { playerState } from "../models/playerState";
 import { sumArrVals } from "../helpers/helpers";
@@ -17,6 +18,7 @@ export const controlPlaceBet = (placedBet) => {
   playerState.totalbets = sumArrVals(placedBetsValsArr);
 
   // Show and update total bet display on UI
+  totalBetView.updateTotalBetsVal(playerState.totalbets);
 
   // Add bets to the bet area
   betAreaView.render(placedBet);
