@@ -1,13 +1,13 @@
 export default class View {
   _data;
-  _options = {
+  _renderOptions = {
     clearBeforeAdding: true,
     position: "afterbegin",
   };
 
-  render(data, options = this._options) {
+  render(data, renderOptions = this._renderOptions) {
     this._data = data;
-    const { clearBeforeAdding, position } = options;
+    const { clearBeforeAdding, position } = renderOptions;
 
     const markup = this._generateMarkup();
 
