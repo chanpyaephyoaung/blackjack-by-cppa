@@ -22,7 +22,7 @@ class ChipsListView extends View {
         // Retrieve the placed bet
         const placedBet = {
           type: e.target.dataset.chipType,
-          value: e.target.dataset.chipValue,
+          value: +e.target.dataset.chipValue,
         };
 
         handler(placedBet);

@@ -1,4 +1,4 @@
 export const playerState = {
-  bets: [],
+  betChipListHistory: [],
   totalbets: 0,
 };

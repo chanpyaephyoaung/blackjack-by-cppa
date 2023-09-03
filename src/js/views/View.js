@@ -7,9 +7,9 @@ export default class View {
 
   render(data, renderOptions = this._renderOptions) {
     this._data = data;
-    const { clearBeforeAdding, position } = renderOptions;
 
     const markup = this._generateMarkup();
+    const { clearBeforeAdding, position } = renderOptions;
 
     if (clearBeforeAdding) {
       this._clear();

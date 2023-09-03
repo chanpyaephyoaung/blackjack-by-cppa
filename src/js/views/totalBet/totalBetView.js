@@ -3,7 +3,6 @@ class TotalBetViews {
 
   constructor() {
     window.addEventListener("load", () => {
-      console.log(this);
       this.updateTotalBetsVal(0);
     });
   }
