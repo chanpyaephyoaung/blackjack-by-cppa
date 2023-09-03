@@ -1,1 +1,2 @@
 export const MODAL_TOGGLE_DURATION = 300;
+export const BET_AREA_CHIPS_CLEAR_DURATION = 100;

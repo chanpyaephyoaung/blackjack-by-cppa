@@ -1,5 +1,5 @@
 import chipsListView from "../views/chips/chipsListView";
-import betAreaView from "../views/betArea/betAreaView";
+import betAreaChipsView from "../views/betArea/betAreaChipsView";
 import totalBetView from "../views/totalBet/totalBetView";
 import { chipsList } from "../models/chipsmodel";
 import { playerState } from "../models/playerState";
@@ -58,7 +58,7 @@ export const controlPlaceBet = (placedBet) => {
   totalBetView.updateTotalBetsVal(playerState.totalbets);
 
   // Add bets to the bet area
-  betAreaView.render(placedBet);
+  betAreaChipsView.render(placedBet);
 
   // Upgrade bet chips history if needed
   if (upgradeBetChipsListHistory(chipsList, playerState.betChipListHistory)) {
@@ -66,7 +66,7 @@ export const controlPlaceBet = (placedBet) => {
       chipsList,
       playerState.betChipListHistory
     );
-    betAreaView.render(playerState.betChipListHistory);
+    betAreaChipsView.render(playerState.betChipListHistory);
   }
 
   // console.log(playerState.betChipListHistory);

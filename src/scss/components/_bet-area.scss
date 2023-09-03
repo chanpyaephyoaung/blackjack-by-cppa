@@ -31,6 +31,14 @@
     position: relative;
 
     &__chips {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    &__chip {
       &:not(:first-child) {
         margin-left: -2rem;
       }
