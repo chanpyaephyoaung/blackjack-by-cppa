@@ -1,6 +1,7 @@
 import chipsListView from "../views/chips/chipsListView";
 import betAreaChipsView from "../views/betArea/betAreaChipsView";
 import totalBetView from "../views/totalBet/totalBetView";
+import totalScoreView from "../views/totalScore/totalScoreView";
 import { chipsList } from "../models/chipsmodel";
 import { playerState } from "../models/playerState";
 import { sumArrVals, countArrElOccurences } from "../helpers/helpers";
@@ -57,6 +58,10 @@ export const controlPlaceBet = (placedBet) => {
   // Show and update total bet display on UI
   totalBetView.updateTotalBetsVal(playerState.totalbets);
 
+  // Show and update total score display on UI
+  const updatedTotalScore = playerState.totalScore - playerState.totalbets;
+  totalScoreView.updateTotalScore(updatedTotalScore);
+
   // Add bets to the bet area
   betAreaChipsView.render(placedBet);
 
@@ -68,6 +73,4 @@ export const controlPlaceBet = (placedBet) => {
     );
     betAreaChipsView.render(playerState.betChipListHistory);
   }
-
-  // console.log(playerState.betChipListHistory);
 };
