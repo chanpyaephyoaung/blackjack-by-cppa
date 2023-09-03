@@ -48,6 +48,12 @@ const upgradeBetChipsListHistory = (mainChipsList, betChipListHistory) => {
 };
 
 export const controlPlaceBet = (placedBet) => {
+  // Return if the player does not have enough money left to bet
+  if (playerState.totalScore < placedBet.value) {
+    console.log("Not enough money!");
+    return;
+  }
+
   // Add the current placed bet to the player's bet list
   playerState.betChipListHistory.push(placedBet);
 
@@ -59,8 +65,11 @@ export const controlPlaceBet = (placedBet) => {
   totalBetView.updateTotalBetsVal(playerState.totalbets);
 
   // Show and update total score display on UI
-  const updatedTotalScore = playerState.totalScore - playerState.totalbets;
+  const updatedTotalScore = playerState.totalScore - placedBet.value;
   totalScoreView.updateTotalScore(updatedTotalScore);
+
+  // Update total score state
+  playerState.totalScore = updatedTotalScore;
 
   // Add bets to the bet area
   betAreaChipsView.render(placedBet);

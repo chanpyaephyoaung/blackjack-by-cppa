@@ -7,13 +7,14 @@ export const controlResetBets = async () => {
   // Clear the bets in UI with animation
   await betAreaChipsView.clearBetAreaChips();
 
-  // Reset player bet history and total bets
+  // Reset player bet history, total bets and total score
   playerState.betChipListHistory = [];
+  playerState.totalScore += playerState.totalbets;
   playerState.totalbets = 0;
 
   // Reset total bet display on UI to 0
   totalBetView.updateTotalBetsVal(0);
 
-  // Reset toatl score display on UI to initial score
+  // Reset total score display on UI to initial score
   totalScoreView.updateTotalScore(playerState.totalScore);
 };
