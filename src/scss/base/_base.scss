@@ -38,6 +38,10 @@ body {
     background-size: cover;
     background-position: center;
   }
+
+  @include respond(tab-land) {
+    overflow-y: hidden;
+  }
 }
 
 .main {

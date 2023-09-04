@@ -2,6 +2,7 @@ import chipsListView from "../views/chips/chipsListView";
 import betAreaChipsView from "../views/betArea/betAreaChipsView";
 import totalBetView from "../views/totalBet/totalBetView";
 import totalScoreView from "../views/totalScore/totalScoreView";
+import alertView from "../views/alert/alertView";
 import { chipsList } from "../models/chipsmodel";
 import { playerState } from "../models/playerState";
 import { sumArrVals, countArrElOccurences } from "../helpers/helpers";
@@ -47,10 +48,11 @@ const upgradeBetChipsListHistory = (mainChipsList, betChipListHistory) => {
   return upgraded ? betChipListHistory : null;
 };
 
-export const controlPlaceBet = (placedBet) => {
-  // Return if the player does not have enough money left to bet
+export const controlPlaceBet = async (placedBet) => {
+  // Warn  if the player does not have enough money left to bet
   if (playerState.totalScore < placedBet.value) {
-    console.log("Not enough money!");
+    // Show alert
+    await alertView.showAlert("Not enough money!");
     return;
   }
 
