@@ -1,3 +1,10 @@
+import {
+  MIN_CARD_VALUE,
+  MAX_CARD_VALUE,
+  MIN_SUIT_VALUE,
+  MAX_SUIT_VALUE,
+} from "../config/cardConfig";
+
 // Promisifying setTimeouts
 export const wait = (milliseconds) => {
   return new Promise((resolve) => {
@@ -23,4 +30,26 @@ export const countArrElOccurences = (arr) => {
   }
 
   return counts;
+};
+
+// Generate random number - Both min and max inclusive
+export const generateRandNum = (min, max) => {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1) + min);
+};
+
+// Generate random card
+export const generateRandCard = (type) => {
+  const suit = generateRandNum(MIN_SUIT_VALUE, MAX_SUIT_VALUE);
+  const value = generateRandNum(MIN_CARD_VALUE, MAX_CARD_VALUE);
+
+  return {
+    type,
+    card: {
+      id: `${value}-${suit}`,
+      value,
+      suit,
+    },
+  };
 };

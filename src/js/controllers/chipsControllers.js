@@ -61,10 +61,10 @@ export const controlPlaceBet = async (placedBet) => {
 
   // Update total bets amount
   const placedBetsValsArr = playerState.betChipListHistory.map(({ value }) => value);
-  playerState.totalbets = sumArrVals(placedBetsValsArr);
+  playerState.totalBets = sumArrVals(placedBetsValsArr);
 
   // Show and update total bet display on UI
-  totalBetView.updateTotalBetsVal(playerState.totalbets);
+  totalBetView.updateTotalBetsVal(playerState.totalBets);
 
   // Show and update total score display on UI
   const updatedTotalScore = playerState.totalScore - placedBet.value;
