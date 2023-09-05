@@ -83,12 +83,25 @@ export const controlInitialBet = async () => {
     const { type: dealerType, card: dealerCard } = generatedDealerCard;
 
     // Render both player and dealer cards
-    playerCardView.render({ type: playerType, card: playerCard });
-    dealerCardView.render({ type: dealerType, card: dealerCard });
+    playerCardView.render({ type: playerType, card: playerCard, stale: false });
+    if (i === INITIAL_GENERATE_CARD_COUNT - 1) {
+      dealerCardView.render({ type: dealerType, card: dealerCard, stale: true });
+    } else {
+      dealerCardView.render({ type: dealerType, card: dealerCard, stale: false });
+    }
 
     // Delay after rendering each card for both player and dealer
     await wait(GENERATE_CARD_DELAY);
   }
-
-  console.log(cardDeck.generatedCardsHistory);
 };
+
+// For Future Use
+// To flip back the second card of the dealer
+// function flip() {
+//   // card[0] means .card__side--front
+//   card[0].classList.remove('card__side--front--stale');
+//   card[0].style.animation = '.3s ease-in forwards cardFront--toBack';
+//   // card[0] means .card__side--back
+//   card[1].classList.remove('card__side--back--stale');
+//   card[1].style.animation = '.3s ease-in forwards cardBack--toFront';
+// }
