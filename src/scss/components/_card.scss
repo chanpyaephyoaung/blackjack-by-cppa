@@ -126,16 +126,16 @@
     width: var(--card-length-lg);
     height: var(--card-height-lg);
 
-    &:not(:first-child) {
-      margin-left: calc((var(--card-length-lg) - 0.75rem) * -1);
+    &:not(:last-child) {
+      margin-right: calc((var(--card-length-lg) - 0.85rem) * -1);
     }
 
     &--sm {
       width: var(--card-length-sm);
       height: var(--card-height-sm);
 
-      &:not(:first-child) {
-        margin-left: calc((var(--card-length-sm) - 0.7rem) * -1);
+      &:not(:last-child) {
+        margin-right: calc((var(--card-length-sm) - 0.8rem) * -1);
       }
     }
   }
@@ -144,8 +144,8 @@
     width: var(--card-length-md);
     height: var(--card-height-md);
 
-    &:not(:first-child) {
-      margin-left: calc((var(--card-length-md) - 0.7rem) * -1);
+    &:not(:last-child) {
+      margin-right: calc((var(--card-length-md) - 0.8rem) * -1);
     }
   }
 
