@@ -6,6 +6,7 @@ export default class CardView extends View {
     position: "beforeend",
   };
   _generateMarkup() {
+    console.log(this._data);
     const { type, card } = this._data;
     return `
          <div class="card card--${type}">

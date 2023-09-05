@@ -2,9 +2,11 @@ import betAreaChipsView from "../views/betArea/betAreaChipsView";
 import totalBetView from "../views/totalBet/totalBetView";
 import totalScoreView from "../views/totalScore/totalScoreView";
 import playerCardView from "../views/cards/playerCardView";
+import dealerCardView from "../views/cards/dealerCardView";
 import alertView from "../views/alert/alertView";
 import { generateRandCard, wait } from "../helpers/helpers";
 import { playerState } from "../models/playerState";
+import { dealerState } from "../models/dealerState";
 import { cardDeck } from "../models/cardDeck";
 import { GENERATE_CARD_DELAY } from "../config/animationConfig";
 import { INITIAL_GENERATE_CARD_COUNT, TOTAL_CARDS_NUM } from "../config/cardConfig";
@@ -30,19 +32,25 @@ export const controlResetBets = async () => {
   totalScoreView.updateTotalScore(playerState.totalScore);
 };
 
-const createCard = (cardDeckHistory, playerType) => {
+const createAndSaveCard = (cardDeckHistory, playerType, playerTypeCardHistory) => {
+  // Create card
   let { type, card } = generateRandCard(playerType);
   if (cardDeckHistory.length > 0) {
+    // Check if the card is already in the card deck history. Change another if true
     while (cardDeckHistory.some((generatedCard) => generatedCard.id === card.id)) {
       if (cardDeckHistory.length === TOTAL_CARDS_NUM) {
         alertView.showAlert("Card Deck Limit Reached!");
         return;
       } else {
-        type = generateRandCard("player").type;
-        card = generateRandCard("player").card;
+        type = generateRandCard(playerType).type;
+        card = generateRandCard(playerType).card;
       }
     }
   }
+
+  // Save card
+  playerTypeCardHistory.push(card);
+  cardDeckHistory.push(card);
 
   return { type, card };
 };
@@ -54,22 +62,33 @@ export const controlInitialBet = async () => {
     return;
   }
 
-  // Create and store a random card
   for (let i = 0; i < INITIAL_GENERATE_CARD_COUNT; i++) {
-    // Create a card
-    const generatedCard = createCard(cardDeck.generatedCardsHistory, "player");
-    // Guard clause
-    if (!generatedCard) return;
-    const { type, card } = generatedCard;
+    // Create and save cards for both player and dealer
+    // For Player
+    const generatedPlayerCard = createAndSaveCard(
+      cardDeck.generatedCardsHistory,
+      "player",
+      playerState.cardListHistory
+    );
+    if (!generatedPlayerCard) return;
+    const { type: playerType, card: playerCard } = generatedPlayerCard;
 
-    // Render a card
-    playerCardView.render({ type, card });
+    // For Dealer
+    const generatedDealerCard = createAndSaveCard(
+      cardDeck.generatedCardsHistory,
+      "dealer",
+      dealerState.cardListHistory
+    );
+    if (!generatedDealerCard) return;
+    const { type: dealerType, card: dealerCard } = generatedDealerCard;
 
-    // Store card to both player card history and card deck history
-    playerState.cardListHistory.push(card);
-    cardDeck.generatedCardsHistory.push(card);
+    // Render both player and dealer cards
+    playerCardView.render({ type: playerType, card: playerCard });
+    dealerCardView.render({ type: dealerType, card: dealerCard });
 
-    // Delay after rendering each card
+    // Delay after rendering each card for both player and dealer
     await wait(GENERATE_CARD_DELAY);
   }
+
+  console.log(cardDeck.generatedCardsHistory);
 };
