@@ -4,7 +4,8 @@ import totalScoreView from "../views/totalScore/totalScoreView";
 import playerCardView from "../views/cards/playerCardView";
 import dealerCardView from "../views/cards/dealerCardView";
 import alertView from "../views/alert/alertView";
-import { generateRandCard, wait } from "../helpers/helpers";
+import playerCardsScoreView from "../views/cardsScore/playerCardsScoreView";
+import { generateRandCard, wait, sumArrVals } from "../helpers/helpers";
 import { playerState } from "../models/playerState";
 import { dealerState } from "../models/dealerState";
 import { cardDeck } from "../models/cardDeck";
@@ -71,6 +72,12 @@ export const controlInitialBet = async () => {
       playerState.cardListHistory
     );
     if (!generatedPlayerCard) return;
+
+    // Store player's total cards score
+    playerState.totalCardsScore = sumArrVals(playerState.cardListHistory.map(({ value }) => value));
+    playerCardsScoreView.showCardsScore(playerState.totalCardsScore);
+    playerCardsScoreView.animateCardsScore();
+
     const { type: playerType, card: playerCard } = generatedPlayerCard;
 
     // For Dealer
