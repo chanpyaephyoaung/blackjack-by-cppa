@@ -3,14 +3,30 @@ import totalBetView from "../views/totalBet/totalBetView";
 import totalScoreView from "../views/totalScore/totalScoreView";
 import playerCardView from "../views/cards/playerCardView";
 import dealerCardView from "../views/cards/dealerCardView";
+import playerControlsRightView from "../views/playerControls/playerControlsRightView";
 import alertView from "../views/alert/alertView";
 import playerCardsScoreView from "../views/cardsScore/playerCardsScoreView";
-import { generateRandCard, wait, sumArrVals } from "../helpers/helpers";
+import { generateRandCard, wait, sumArrVals, updateCardsTotalScore } from "../helpers/helpers";
 import { playerState } from "../models/playerState";
 import { dealerState } from "../models/dealerState";
 import { cardDeck } from "../models/cardDeck";
 import { GENERATE_CARD_DELAY } from "../config/animationConfig";
 import { INITIAL_GENERATE_CARD_COUNT, TOTAL_CARDS_NUM } from "../config/cardConfig";
+
+export const controlPlayerControlsRightInitialBtns = async () => {
+  const initialBtns = [
+    {
+      type: "bet",
+      variant: "primary",
+    },
+    {
+      type: "reset",
+      variant: "danger",
+    },
+  ];
+
+  await playerControlsRightView.render(initialBtns);
+};
 
 export const controlResetBets = async () => {
   // // Only allow player to reset bets if they has already placed a bet
@@ -74,7 +90,9 @@ export const controlInitialBet = async () => {
     if (!generatedPlayerCard) return;
 
     // Store player's total cards score
-    playerState.totalCardsScore = sumArrVals(playerState.cardListHistory.map(({ value }) => value));
+    // playerState.totalCardsScore = sumArrVals(playerState.cardListHistory.map(({ value }) => value));
+    const playerTotalCardsScoreVals = playerState.cardListHistory.map(({ value }) => value);
+    playerState.totalCardsScore = updateCardsTotalScore(playerTotalCardsScoreVals);
     playerCardsScoreView.showCardsScore(playerState.totalCardsScore);
     playerCardsScoreView.animateCardsScore();
 
@@ -92,9 +110,17 @@ export const controlInitialBet = async () => {
     // Render both player and dealer cards
     playerCardView.render({ type: playerType, card: playerCard, stale: false });
     if (i === INITIAL_GENERATE_CARD_COUNT - 1) {
-      dealerCardView.render({ type: dealerType, card: dealerCard, stale: true });
+      dealerCardView.render({
+        type: dealerType,
+        card: dealerCard,
+        stale: true,
+      });
     } else {
-      dealerCardView.render({ type: dealerType, card: dealerCard, stale: false });
+      dealerCardView.render({
+        type: dealerType,
+        card: dealerCard,
+        stale: false,
+      });
     }
 
     // Delay after rendering each card for both player and dealer

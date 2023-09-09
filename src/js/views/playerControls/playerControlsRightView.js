@@ -1,16 +1,24 @@
-import View from "../View";
+import PlayerControlsView from "./playerControlsView";
 
-class PlayerControlsRightView extends View {
+class PlayerControlsRightView extends PlayerControlsView {
   _containerEl = document.querySelector(".player__controls__right");
-  _btnReset = document.querySelector(".btn--reset");
-  _btnBet = document.querySelector(".btn--bet");
+
+  addHandlerInitialRender(handler) {
+    window.addEventListener("load", handler);
+  }
 
   addHandlerBtnReset(handler) {
-    this._btnReset.addEventListener("click", handler);
+    this._containerEl.addEventListener("click", (e) => {
+      if (e.target.classList.contains("btn--reset")) handler();
+      else return;
+    });
   }
 
   addHandlerBtnBet(handler) {
-    this._btnBet.addEventListener("click", handler);
+    this._containerEl.addEventListener("click", (e) => {
+      if (e.target.classList.contains("btn--bet")) handler();
+      else return;
+    });
   }
 }
 

@@ -1,9 +1,4 @@
-import {
-  MIN_CARD_VALUE,
-  MAX_CARD_VALUE,
-  MIN_SUIT_VALUE,
-  MAX_SUIT_VALUE,
-} from "../config/cardConfig";
+import { MIN_CARD_VALUE, MAX_CARD_VALUE, MIN_SUIT_VALUE, MAX_SUIT_VALUE } from "../config/cardConfig";
 
 // Promisifying setTimeouts
 export const wait = (milliseconds) => {
@@ -52,4 +47,17 @@ export const generateRandCard = (type) => {
       suit,
     },
   };
+};
+
+export const updateCardsTotalScore = (scoreList) => {
+  let updatedScoreForFaceCards = scoreList;
+  // Set face card values to 10 if the scorelist contain face card/s
+  if (scoreList.some((score) => score > 10)) {
+    updatedScoreForFaceCards = scoreList.map((score) => (score > 10 ? 10 : score));
+  }
+  if (scoreList.includes(1) && sumArrVals(updatedScoreForFaceCards) <= 21) {
+    updatedScoreForFaceCards = updatedScoreForFaceCards.map((score) => (score === 1 ? 11 : score));
+  }
+
+  return sumArrVals(updatedScoreForFaceCards);
 };
