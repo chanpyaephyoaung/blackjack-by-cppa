@@ -75,13 +75,7 @@ const createAndSaveCard = (cardDeckHistory, playerType, playerTypeCardHistory) =
    return { type, card };
 };
 
-export const controlInitialBet = async () => {
-   // Only allow player to bet if they has already placed a bet
-   if (playerState.totalBets === 0) {
-      alertView.showAlert("Please place your bet!");
-      return;
-   }
-
+const controlBetPlacedBtnsAnimation = async () => {
    // Hide Initial Play Controls Right Buttons
    await playerControlsRightBtnsView.removeBtns(["bet", "reset"]);
 
@@ -108,6 +102,17 @@ export const controlInitialBet = async () => {
    ];
 
    await playerControlsLeftBtnsView.addBtn(playerControlsLeftPlayBtns);
+};
+
+export const controlInitialBet = async () => {
+   // Only allow player to bet if they has already placed a bet
+   if (playerState.totalBets === 0) {
+      alertView.showAlert("Please place your bet!");
+      return;
+   }
+
+   // Animate the play buttons when the bet is placed
+   await controlBetPlacedBtnsAnimation();
 
    for (let i = 0; i < INITIAL_GENERATE_CARD_COUNT; i++) {
       // Create and save cards for both player and dealer
