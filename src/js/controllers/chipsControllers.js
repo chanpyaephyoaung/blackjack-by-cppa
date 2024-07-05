@@ -6,82 +6,94 @@ import alertView from "../views/alert/alertView";
 import { chipsList } from "../models/chipsmodel";
 import { playerState } from "../models/playerState";
 import { sumArrVals, countArrElOccurences } from "../helpers/helpers";
+import { betState } from "../models/chipsState";
 
 export const controlBetChipsList = () => {
-  chipsListView.render(chipsList);
+   chipsListView.render(chipsList);
 };
 
 // Upgrade player's bet chips history when necessary
 const upgradeBetChipsListHistory = (mainChipsList, betChipListHistory) => {
-  const placedBetsTypes = betChipListHistory.map(({ type }) => type);
-  const chipsFrequency = countArrElOccurences(placedBetsTypes);
-  let upgraded = false;
+   const placedBetsTypes = betChipListHistory.map(({ type }) => type);
+   const chipsFrequency = countArrElOccurences(placedBetsTypes);
+   let upgraded = false;
 
-  placedBetsTypes.forEach((betType) => {
-    // Info on upgrading chip
-    const targetChipTypeModel = mainChipsList.find((chip) => chip.type === betType);
+   placedBetsTypes.forEach((betType) => {
+      // Info on upgrading chip
+      const targetChipTypeModel = mainChipsList.find((chip) => chip.type === betType);
 
-    // Upgrade chip if the number of a chip type reached its upgrade point
-    if (chipsFrequency[betType] === targetChipTypeModel.upgrade.requiredPoint) {
-      const targetChipType = targetChipTypeModel.upgrade.targetType;
-      const targetChipVal = targetChipTypeModel.upgrade.targetValue;
+      // Upgrade chip if the number of a chip type reached its upgrade point
+      if (chipsFrequency[betType] === targetChipTypeModel.upgrade.requiredPoint) {
+         const targetChipType = targetChipTypeModel.upgrade.targetType;
+         const targetChipVal = targetChipTypeModel.upgrade.targetValue;
 
-      // Update the bet history with upgraded chip instead of degraded chips
-      // [{type: 1k, value: 1000}, {type: 1k, value: 1000}] => [{type: 2k, value: 2000}]
-      const upgradedChip = {
-        type: targetChipType,
-        value: targetChipVal,
-      };
+         // Update the bet history with upgraded chip instead of degraded chips
+         // [{type: 1k, value: 1000}, {type: 1k, value: 1000}] => [{type: 2k, value: 2000}]
+         const upgradedChip = {
+            type: targetChipType,
+            value: targetChipVal,
+         };
 
-      betChipListHistory = [
-        ...betChipListHistory.filter((betChip) => betChip.type !== betType),
-        upgradedChip,
-      ];
+         betChipListHistory = [
+            ...betChipListHistory.filter((betChip) => betChip.type !== betType),
+            upgradedChip,
+         ];
 
-      // Reset that chip frequency to 0
-      chipsFrequency[betType] = 0;
+         // Reset that chip frequency to 0
+         chipsFrequency[betType] = 0;
 
-      upgraded = true;
-    }
-  });
+         upgraded = true;
+      }
+   });
 
-  return upgraded ? betChipListHistory : null;
+   return upgraded ? betChipListHistory : null;
 };
 
 export const controlPlaceBet = async (placedBet) => {
-  // Warn  if the player does not have enough money left to bet
-  if (playerState.totalScore < placedBet.value) {
-    // Show alert
-    await alertView.showAlert("Not enough money!");
-    return;
-  }
+   console.log(betState.isBetPlaced);
+   // Check if the player has already placed a bet
+   if (betState.isBetPlaced) {
+      console.log("Bet already placed!");
+      return;
+   }
 
-  // Add the current placed bet to the player's bet list
-  playerState.betChipListHistory.push(placedBet);
+   // Warn  if the player does not have enough money left to bet
+   if (playerState.totalScore < placedBet.value) {
+      // Show alert
+      await alertView.showAlert("Not enough money!");
+      return;
+   }
 
-  // Update total bets amount
-  const placedBetsValsArr = playerState.betChipListHistory.map(({ value }) => value);
-  playerState.totalBets = sumArrVals(placedBetsValsArr);
+   // Change the state of the bet placement
+   betState.isBetPlaced = true;
+   console.log("After changing the state: ", betState.isBetPlaced);
 
-  // Show and update total bet display on UI
-  totalBetView.updateTotalBetsVal(playerState.totalBets);
+   // Add the current placed bet to the player's bet list
+   playerState.betChipListHistory.push(placedBet);
 
-  // Show and update total score display on UI
-  const updatedTotalScore = playerState.totalScore - placedBet.value;
-  totalScoreView.updateTotalScore(updatedTotalScore);
+   // Update total bets amount
+   const placedBetsValsArr = playerState.betChipListHistory.map(({ value }) => value);
+   playerState.totalBets = sumArrVals(placedBetsValsArr);
 
-  // Update total score state
-  playerState.totalScore = updatedTotalScore;
+   // Show and update total bet display on UI
+   totalBetView.updateTotalBetsVal(playerState.totalBets);
 
-  // Add bets to the bet area
-  betAreaChipsView.render(placedBet);
+   // Show and update total score display on UI
+   const updatedTotalScore = playerState.totalScore - placedBet.value;
+   totalScoreView.updateTotalScore(updatedTotalScore);
 
-  // Upgrade bet chips history if needed
-  if (upgradeBetChipsListHistory(chipsList, playerState.betChipListHistory)) {
-    playerState.betChipListHistory = upgradeBetChipsListHistory(
-      chipsList,
-      playerState.betChipListHistory
-    );
-    betAreaChipsView.render(playerState.betChipListHistory);
-  }
+   // Update total score state
+   playerState.totalScore = updatedTotalScore;
+
+   // Add bets to the bet area
+   betAreaChipsView.render(placedBet);
+
+   // Upgrade bet chips history if needed
+   if (upgradeBetChipsListHistory(chipsList, playerState.betChipListHistory)) {
+      playerState.betChipListHistory = upgradeBetChipsListHistory(
+         chipsList,
+         playerState.betChipListHistory
+      );
+      betAreaChipsView.render(playerState.betChipListHistory);
+   }
 };
