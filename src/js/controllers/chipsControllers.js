@@ -53,7 +53,8 @@ export const controlPlaceBet = async (placedBet) => {
    console.log(betState.isBetPlaced);
    // Check if the player has already placed a bet
    if (betState.isBetPlaced) {
-      console.log("Bet already placed!");
+      // Show alert
+      await alertView.showAlert("You have already placed a bet!");
       return;
    }
 
@@ -66,7 +67,6 @@ export const controlPlaceBet = async (placedBet) => {
 
    // Change the state of the bet placement
    betState.isBetPlaced = true;
-   console.log("After changing the state: ", betState.isBetPlaced);
 
    // Add the current placed bet to the player's bet list
    playerState.betChipListHistory.push(placedBet);
