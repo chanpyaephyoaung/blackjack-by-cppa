@@ -104,6 +104,47 @@ const controlBetPlacedBtnsAnimation = async () => {
    await playerControlsLeftBtnsView.addBtn(playerControlsLeftPlayBtns);
 };
 
+const updateAndShowPlayerTotalCardsScore = () => {
+   // playerState.totalCardsScore = sumArrVals(playerState.cardListHistory.map(({ value }) => value));
+   const playerTotalCardsScoreVals = playerState.cardListHistory.map(({ value }) => value);
+   playerState.totalCardsScore = updateCardsTotalScore(playerTotalCardsScoreVals);
+   playerCardsScoreView.showCardsScore(playerState.totalCardsScore);
+   playerCardsScoreView.animateCardsScore();
+};
+
+const createAndRenderPlayerCard = () => {
+   // Create and save card for player
+   const generatedPlayerCard = createAndSaveCard(
+      cardDeck.generatedCardsHistory,
+      "player",
+      playerState.cardListHistory
+   );
+   if (!generatedPlayerCard) return;
+
+   // Update and show player's total cards score
+   updateAndShowPlayerTotalCardsScore();
+
+   const { type: playerType, card: playerCard } = generatedPlayerCard;
+   playerCardView.render({ type: playerType, card: playerCard, stale: false });
+};
+
+const createAndRenderDealerCard = (option = {}) => {
+   // Create and save card for dealer
+   const generatedDealerCard = createAndSaveCard(
+      cardDeck.generatedCardsHistory,
+      "dealer",
+      dealerState.cardListHistory
+   );
+   if (!generatedDealerCard) return;
+
+   const { type: dealerType, card: dealerCard } = generatedDealerCard;
+   dealerCardView.render({
+      type: dealerType,
+      card: dealerCard,
+      stale: option?.staleStatus || false,
+   });
+};
+
 export const controlInitialBet = async () => {
    // Only allow player to bet if they has already placed a bet
    if (playerState.totalBets === 0) {
@@ -117,52 +158,21 @@ export const controlInitialBet = async () => {
    for (let i = 0; i < INITIAL_GENERATE_CARD_COUNT; i++) {
       // Create and save cards for both player and dealer
       // For Player
-      const generatedPlayerCard = createAndSaveCard(
-         cardDeck.generatedCardsHistory,
-         "player",
-         playerState.cardListHistory
-      );
-      if (!generatedPlayerCard) return;
-
-      // Store player's total cards score
-      // playerState.totalCardsScore = sumArrVals(playerState.cardListHistory.map(({ value }) => value));
-      const playerTotalCardsScoreVals = playerState.cardListHistory.map(({ value }) => value);
-      playerState.totalCardsScore = updateCardsTotalScore(playerTotalCardsScoreVals);
-      playerCardsScoreView.showCardsScore(playerState.totalCardsScore);
-      playerCardsScoreView.animateCardsScore();
-
-      const { type: playerType, card: playerCard } = generatedPlayerCard;
+      createAndRenderPlayerCard();
 
       // For Dealer
-      const generatedDealerCard = createAndSaveCard(
-         cardDeck.generatedCardsHistory,
-         "dealer",
-         dealerState.cardListHistory
-      );
-      if (!generatedDealerCard) return;
-      const { type: dealerType, card: dealerCard } = generatedDealerCard;
-
-      // Render both player and dealer cards
-      playerCardView.render({ type: playerType, card: playerCard, stale: false });
+      // Render the second card of the dealer with the back side
       if (i === INITIAL_GENERATE_CARD_COUNT - 1) {
-         dealerCardView.render({
-            type: dealerType,
-            card: dealerCard,
-            stale: true,
-         });
+         createAndRenderDealerCard({ staleStatus: true });
       } else {
-         dealerCardView.render({
-            type: dealerType,
-            card: dealerCard,
-            stale: false,
-         });
+         createAndRenderDealerCard();
       }
-
       // Delay after rendering each card for both player and dealer
       await wait(GENERATE_CARD_DELAY);
    }
 };
 
+export const controlHitNewCard = async () => {};
 // For Future Use
 // To flip back the second card of the dealer
 // function flip() {
