@@ -172,7 +172,9 @@ export const controlInitialBet = async () => {
    }
 };
 
-export const controlHitNewCard = async () => {};
+export const controlHitNewCard = async () => {
+   createAndRenderPlayerCard();
+};
 // For Future Use
 // To flip back the second card of the dealer
 // function flip() {
