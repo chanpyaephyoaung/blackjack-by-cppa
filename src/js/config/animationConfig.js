@@ -4,6 +4,9 @@ export const MODAL_TOGGLE_DURATION = 300;
 // Alert
 export const ALERT_TOGGLE_DURATION = 300;
 
+// Final Result Message
+export const FINAL_RESULT_TOGGLE_DURATION = 1000;
+
 // Bet Area Chips
 export const BET_AREA_CHIPS_CLEAR_DURATION = 50;
 

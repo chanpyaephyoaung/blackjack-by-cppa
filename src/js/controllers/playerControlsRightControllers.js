@@ -5,6 +5,7 @@ import playerCardView from "../views/cards/playerCardView";
 import dealerCardView from "../views/cards/dealerCardView";
 import playerControlsRightView from "../views/playerControls/playerControlsRightView";
 import alertView from "../views/alert/alertView";
+import resultMessageView from "../views/resultMessage/resultMessageView";
 import playerCardsScoreView from "../views/cardsScore/playerCardsScoreView";
 import playerControlsRightBtnsView from "../views/buttons/playerControlsRightBtnsView";
 import playerControlsLeftBtnsView from "../views/buttons/playerControlsLeftBtnsView";
@@ -174,6 +175,10 @@ export const controlInitialBet = async () => {
 
 export const controlHitNewCard = async () => {
    createAndRenderPlayerCard();
+
+   if (playerState.totalCardsScore > 21) {
+      resultMessageView.showFinalResultMsg("Player Busts!");
+   }
 };
 // For Future Use
 // To flip back the second card of the dealer
