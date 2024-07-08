@@ -16,10 +16,12 @@ import { controlTotalScore } from "./controllers/totalScoreControllers";
 const init = () => {
    chipsListView.addHandlerRender(controlBetChipsList);
    chipsListView.addHandlerPlaceBet(controlPlaceBet);
+
    playerControlsRightView.addHandlerInitialRender(controlPlayerControlsRightInitialBtns);
    playerControlsRightView.addHandlerBtnReset(controlResetBets);
    playerControlsRightView.addHandlerBtnBet(controlInitialBet);
    playerControlsRightView.addHandlerBtnHit(controlHitNewCard);
+
    playerControlsLeftView.addHandlerBtnDoubleDown(() => console.log("Double down!"));
 
    totalScoreView.addHandlerDisplayScore(controlTotalScore);

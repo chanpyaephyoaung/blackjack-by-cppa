@@ -9,13 +9,16 @@ import resultMessageView from "../views/resultMessage/resultMessageView";
 import playerCardsScoreView from "../views/cardsScore/playerCardsScoreView";
 import playerControlsRightBtnsView from "../views/buttons/playerControlsRightBtnsView";
 import playerControlsLeftBtnsView from "../views/buttons/playerControlsLeftBtnsView";
+import { wait } from "../helpers/helpers";
 import { generateRandCard, wait, sumArrVals, updateCardsTotalScore } from "../helpers/helpers";
 import { playerState } from "../models/playerState";
 import { dealerState } from "../models/dealerState";
 import { betState } from "../models/chipsState";
+import { gameState } from "../models/gameState";
 import { cardDeck } from "../models/cardDeck";
 import { GENERATE_CARD_DELAY } from "../config/animationConfig";
 import { INITIAL_GENERATE_CARD_COUNT, TOTAL_CARDS_NUM } from "../config/cardConfig";
+import { CLEAN_UP_BTNS_AFTER_FINAL_RESULT_DELAY } from "../config/animationConfig";
 
 export const controlPlayerControlsRightInitialBtns = async () => {
    const initialBtns = [
@@ -77,7 +80,7 @@ const createAndSaveCard = (cardDeckHistory, playerType, playerTypeCardHistory) =
    return { type, card };
 };
 
-const controlBetPlacedBtnsAnimation = async () => {
+const animateBtnsAfterBetPlaced = async () => {
    // Hide Initial Play Controls Right Buttons
    await playerControlsRightBtnsView.removeBtns(["bet", "reset"]);
 
@@ -112,6 +115,15 @@ const updateAndShowPlayerTotalCardsScore = () => {
    playerState.totalCardsScore = updateCardsTotalScore(playerTotalCardsScoreVals);
    playerCardsScoreView.showCardsScore(playerState.totalCardsScore);
    playerCardsScoreView.animateCardsScore();
+};
+
+const cleanUpAfterRoundEnd = async () => {
+   // Delay before cleaning up after the final result message
+   await wait(CLEAN_UP_BTNS_AFTER_FINAL_RESULT_DELAY);
+
+   // Clear the play buttons
+   await playerControlsRightBtnsView.removeBtns(["hit", "stand"]);
+   await playerControlsLeftBtnsView.removeBtns(["double-down"]);
 };
 
 const createAndRenderPlayerCard = () => {
@@ -158,7 +170,7 @@ export const controlInitialBet = async () => {
    betState.isBetPlaced = true;
 
    // Animate the play buttons when the bet is placed
-   await controlBetPlacedBtnsAnimation();
+   await animateBtnsAfterBetPlaced();
 
    for (let i = 0; i < INITIAL_GENERATE_CARD_COUNT; i++) {
       // Create and save cards for both player and dealer
@@ -178,11 +190,22 @@ export const controlInitialBet = async () => {
 };
 
 export const controlHitNewCard = async () => {
+   // Only allow player to hit new card if the game has not ended
+   if (gameState.hasEnded) return;
+
+   // Create and render a new card for the player
    createAndRenderPlayerCard();
 
    // Bust when the player's total cards score is greater than 21
    if (playerState.totalCardsScore > 21) {
+      // Set game state to ended
+      gameState.hasEnded = true;
+
+      // Show final result message
       resultMessageView.showFinalResultMsg("Busted!");
+
+      // Clean up after the round ends
+      await cleanUpAfterRoundEnd();
    }
 };
 // For Future Use
