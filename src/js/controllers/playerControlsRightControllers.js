@@ -12,6 +12,7 @@ import playerControlsLeftBtnsView from "../views/buttons/playerControlsLeftBtnsV
 import { generateRandCard, wait, sumArrVals, updateCardsTotalScore } from "../helpers/helpers";
 import { playerState } from "../models/playerState";
 import { dealerState } from "../models/dealerState";
+import { betState } from "../models/chipsState";
 import { cardDeck } from "../models/cardDeck";
 import { GENERATE_CARD_DELAY } from "../config/animationConfig";
 import { INITIAL_GENERATE_CARD_COUNT, TOTAL_CARDS_NUM } from "../config/cardConfig";
@@ -153,6 +154,9 @@ export const controlInitialBet = async () => {
       return;
    }
 
+   // Change the state of the bet placement
+   betState.isBetPlaced = true;
+
    // Animate the play buttons when the bet is placed
    await controlBetPlacedBtnsAnimation();
 
@@ -176,8 +180,9 @@ export const controlInitialBet = async () => {
 export const controlHitNewCard = async () => {
    createAndRenderPlayerCard();
 
+   // Bust when the player's total cards score is greater than 21
    if (playerState.totalCardsScore > 21) {
-      resultMessageView.showFinalResultMsg("Player Busts!");
+      resultMessageView.showFinalResultMsg("Busted!");
    }
 };
 // For Future Use

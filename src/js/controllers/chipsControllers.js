@@ -65,9 +65,6 @@ export const controlPlaceBet = async (placedBet) => {
       return;
    }
 
-   // Change the state of the bet placement
-   betState.isBetPlaced = true;
-
    // Add the current placed bet to the player's bet list
    playerState.betChipListHistory.push(placedBet);
 
