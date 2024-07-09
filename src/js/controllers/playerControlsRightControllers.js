@@ -113,8 +113,13 @@ const animateBtnsAfterBetPlaced = async () => {
 const updateAndShowPlayerTotalCardsScore = (playerTypeState, playerTypeCardsScoreView) => {
    const playerTotalCardsScoreVals = playerTypeState.cardListHistory.map(({ value }) => value);
    playerTypeState.totalCardsScore = updateCardsTotalScore(playerTotalCardsScoreVals);
-   playerTypeCardsScoreView.showCardsScore(playerTypeState.totalCardsScore);
-   playerTypeCardsScoreView.animateCardsScore();
+   if (playerTypeState.type === "dealer" && playerTypeState.cardListHistory.length === 2) {
+      console.log("BLOCKED SHOWING TOTAL SCORE OF THE DEALER!!!");
+      return;
+   } else {
+      playerTypeCardsScoreView.showCardsScore(playerTypeState.totalCardsScore);
+      playerTypeCardsScoreView.animateCardsScore();
+   }
 };
 
 const cleanUpAfterRoundEnd = async () => {
@@ -150,6 +155,9 @@ const createAndRenderDealerCard = (option = {}) => {
       dealerState.cardListHistory
    );
    if (!generatedDealerCard) return;
+
+   // Update and show dealer's total cards score
+   updateAndShowPlayerTotalCardsScore(dealerState, dealerCardsScoreView);
 
    const { type: dealerType, card: dealerCard } = generatedDealerCard;
    dealerCardView.render({
@@ -214,6 +222,12 @@ export const controlStandGame = async () => {
    dealerCardView.flipSecondCard();
 
    // Show and update the total score of the dealer
-   dealerCardsScoreView.showCardsScore(dealerState.totalCardsScore);
    updateAndShowPlayerTotalCardsScore(dealerState, dealerCardsScoreView);
+   await wait(GENERATE_CARD_DELAY);
+
+   // Hit another card for the dealer until the total score is greater than or equal to 17
+   while (dealerState.totalCardsScore < 17) {
+      createAndRenderDealerCard();
+      await wait(GENERATE_CARD_DELAY);
+   }
 };
