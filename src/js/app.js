@@ -8,8 +8,9 @@ import {
    controlResetBets,
    controlInitialBet,
    controlHitNewCard,
+   controlStandGame,
+   controlPlayerControlsRightInitialBtns,
 } from "./controllers/playerControlsRightControllers";
-import { controlPlayerControlsRightInitialBtns } from "./controllers/playerControlsRightControllers";
 import { controlBetChipsList, controlPlaceBet } from "./controllers/chipsControllers";
 import { controlTotalScore } from "./controllers/totalScoreControllers";
 
@@ -21,6 +22,7 @@ const init = () => {
    playerControlsRightView.addHandlerBtnReset(controlResetBets);
    playerControlsRightView.addHandlerBtnBet(controlInitialBet);
    playerControlsRightView.addHandlerBtnHit(controlHitNewCard);
+   playerControlsRightView.addHandlerBtnStand(controlStandGame);
 
    playerControlsLeftView.addHandlerBtnDoubleDown(() => console.log("Double down!"));
 

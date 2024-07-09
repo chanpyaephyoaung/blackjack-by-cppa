@@ -27,6 +27,13 @@ class PlayerControlsRightView extends PlayerControlsView {
          else return;
       });
    }
+
+   addHandlerBtnStand(handler) {
+      this._containerEl.addEventListener("click", (e) => {
+         if (e.target.classList.contains("btn--stand")) handler();
+         else return;
+      });
+   }
 }
 
 export default new PlayerControlsRightView();

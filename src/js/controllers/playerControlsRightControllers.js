@@ -208,6 +208,10 @@ export const controlHitNewCard = async () => {
       await cleanUpAfterRoundEnd();
    }
 };
+
+export const controlStandGame = async () => {
+   dealerCardView.flipSecondCard();
+};
 // For Future Use
 // To flip back the second card of the dealer
 // function flip() {
