@@ -6,7 +6,6 @@ export default class View {
    };
 
    render(data, renderOptions = this._renderOptions) {
-      console.log(data);
       this._data = data;
 
       const markup = this._generateMarkup();

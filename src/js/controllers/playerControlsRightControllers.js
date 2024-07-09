@@ -113,8 +113,8 @@ const animateBtnsAfterBetPlaced = async () => {
 const updateAndShowPlayerTotalCardsScore = (playerTypeState, playerTypeCardsScoreView) => {
    const playerTotalCardsScoreVals = playerTypeState.cardListHistory.map(({ value }) => value);
    playerTypeState.totalCardsScore = updateCardsTotalScore(playerTotalCardsScoreVals);
+   // Hide the total score of the dealer when the dealer has only 2 cards
    if (playerTypeState.type === "dealer" && playerTypeState.cardListHistory.length === 2) {
-      console.log("BLOCKED SHOWING TOTAL SCORE OF THE DEALER!!!");
       return;
    } else {
       playerTypeCardsScoreView.showCardsScore(playerTypeState.totalCardsScore);
@@ -205,16 +205,16 @@ export const controlHitNewCard = async () => {
    createAndRenderPlayerCard();
 
    // Bust when the player's total cards score is greater than 21
-   if (playerState.totalCardsScore > 21) {
-      // Set game state to ended
-      gameState.hasEnded = true;
+   // if (playerState.totalCardsScore > 21) {
+   //    // Set game state to ended
+   //    gameState.hasEnded = true;
 
-      // Show final result message
-      resultMessageView.showFinalResultMsg("Busted!");
+   //    // Show final result message
+   //    resultMessageView.showFinalResultMsg("Busted!");
 
-      // Clean up after the round ends
-      await cleanUpAfterRoundEnd();
-   }
+   //    // Clean up after the round ends
+   //    await cleanUpAfterRoundEnd();
+   // }
 };
 
 export const controlStandGame = async () => {
