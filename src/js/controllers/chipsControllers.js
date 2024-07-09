@@ -50,7 +50,6 @@ const upgradeBetChipsListHistory = (mainChipsList, betChipListHistory) => {
 };
 
 export const controlPlaceBet = async (placedBet) => {
-   console.log(betState.isBetPlaced);
    // Check if the player has already placed a bet
    if (betState.isBetPlaced) {
       // Show alert

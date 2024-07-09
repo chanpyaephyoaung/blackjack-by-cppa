@@ -68,13 +68,10 @@ export const updateCardsTotalScore = (scoreList) => {
    }
    // Handle the scenario where having 11 (Ace as 11) causes a bust
    if (scoreList.includes(11) && sumArrVals(updatedScoreForFaceCards) > 21) {
-      console.log("HELLO! CHANGED TO 1");
       updatedScoreForFaceCards = updatedScoreForFaceCards.map((score) =>
          score === 11 ? 1 : score
       );
    }
-
-   console.log("AFTER: ", scoreList);
 
    return sumArrVals(updatedScoreForFaceCards);
 };
