@@ -10,10 +10,9 @@ class DealerCardView extends CardView {
       const dealerSecondCardFront = dealerSecondCard.children[0];
       const dealerSecondCardBack = dealerSecondCard.children[1];
 
-      // card[0] means .card__side--front
+      // Flip the card
       dealerSecondCardFront.classList.remove("card__side--front--stale");
       dealerSecondCardFront.style.animation = ".3s ease-in forwards cardFront--toBack";
-      // card[0] means .card__side--back
       dealerSecondCardBack.classList.remove("card__side--back--stale");
       dealerSecondCardBack.style.animation = ".3s ease-in forwards cardBack--toFront";
    }

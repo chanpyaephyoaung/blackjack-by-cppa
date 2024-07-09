@@ -1,3 +1,4 @@
 export const dealerState = {
-  cardListHistory: [],
+   cardListHistory: [],
+   totalCardsScore: 0,
 };

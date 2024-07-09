@@ -7,6 +7,7 @@ import playerControlsRightView from "../views/playerControls/playerControlsRight
 import alertView from "../views/alert/alertView";
 import resultMessageView from "../views/resultMessage/resultMessageView";
 import playerCardsScoreView from "../views/cardsScore/playerCardsScoreView";
+import dealerCardsScoreView from "../views/cardsScore/dealerCardsScoreView";
 import playerControlsRightBtnsView from "../views/buttons/playerControlsRightBtnsView";
 import playerControlsLeftBtnsView from "../views/buttons/playerControlsLeftBtnsView";
 import { wait } from "../helpers/helpers";
@@ -109,12 +110,11 @@ const animateBtnsAfterBetPlaced = async () => {
    await playerControlsLeftBtnsView.addBtn(playerControlsLeftPlayBtns);
 };
 
-const updateAndShowPlayerTotalCardsScore = () => {
-   // playerState.totalCardsScore = sumArrVals(playerState.cardListHistory.map(({ value }) => value));
-   const playerTotalCardsScoreVals = playerState.cardListHistory.map(({ value }) => value);
-   playerState.totalCardsScore = updateCardsTotalScore(playerTotalCardsScoreVals);
-   playerCardsScoreView.showCardsScore(playerState.totalCardsScore);
-   playerCardsScoreView.animateCardsScore();
+const updateAndShowPlayerTotalCardsScore = (playerTypeState, playerTypeCardsScoreView) => {
+   const playerTotalCardsScoreVals = playerTypeState.cardListHistory.map(({ value }) => value);
+   playerTypeState.totalCardsScore = updateCardsTotalScore(playerTotalCardsScoreVals);
+   playerTypeCardsScoreView.showCardsScore(playerTypeState.totalCardsScore);
+   playerTypeCardsScoreView.animateCardsScore();
 };
 
 const cleanUpAfterRoundEnd = async () => {
@@ -136,7 +136,7 @@ const createAndRenderPlayerCard = () => {
    if (!generatedPlayerCard) return;
 
    // Update and show player's total cards score
-   updateAndShowPlayerTotalCardsScore();
+   updateAndShowPlayerTotalCardsScore(playerState, playerCardsScoreView);
 
    const { type: playerType, card: playerCard } = generatedPlayerCard;
    playerCardView.render({ type: playerType, card: playerCard, stale: false });
@@ -210,15 +210,10 @@ export const controlHitNewCard = async () => {
 };
 
 export const controlStandGame = async () => {
+   // Flip the second card of the dealer
    dealerCardView.flipSecondCard();
+
+   // Show and update the total score of the dealer
+   dealerCardsScoreView.showCardsScore(dealerState.totalCardsScore);
+   updateAndShowPlayerTotalCardsScore(dealerState, dealerCardsScoreView);
 };
-// For Future Use
-// To flip back the second card of the dealer
-// function flip() {
-//   // card[0] means .card__side--front
-//   card[0].classList.remove('card__side--front--stale');
-//   card[0].style.animation = '.3s ease-in forwards cardFront--toBack';
-//   // card[0] means .card__side--back
-//   card[1].classList.remove('card__side--back--stale');
-//   card[1].style.animation = '.3s ease-in forwards cardBack--toFront';
-// }
