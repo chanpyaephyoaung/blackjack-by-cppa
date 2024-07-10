@@ -124,6 +124,16 @@ const cleanUpAfterRoundEnd = async () => {
    // Clear the play buttons
    await playerControlsRightBtnsView.removeBtns(["hit", "stand"]);
    await playerControlsLeftBtnsView.removeBtns(["double-down"]);
+
+   // Set total bets to 0
+   playerState.totalBets = 0;
+   totalBetView.updateTotalBetsVal(0);
+
+   // Clear the bets in UI with animation
+   await betAreaChipsView.clearBetAreaChips();
+
+   // Reset player bet history
+   playerState.betChipListHistory = [];
 };
 
 const createAndRenderPlayerCard = () => {
