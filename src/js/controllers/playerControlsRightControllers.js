@@ -164,6 +164,42 @@ const createAndRenderDealerCard = (option = {}) => {
    });
 };
 
+const decideWinnerAfterStand = () => {
+   if (
+      dealerState.totalCardsScore > 21 ||
+      playerState.totalCardsScore > dealerState.totalCardsScore
+   ) {
+      // Player wins
+      playerState.totalScore += playerState.totalBets * 2;
+      totalScoreView.updateTotalScore(playerState.totalScore);
+
+      // Show final result message
+      resultMessageView.showFinalResultMsg("You Win!");
+
+      // Set game state to ended
+      gameState.hasEnded = true;
+   } else if (playerState.totalCardsScore === dealerState.totalCardsScore) {
+      // Draw
+      playerState.totalScore += playerState.totalBets;
+      totalScoreView.updateTotalScore(playerState.totalScore);
+
+      // Show final result message
+      resultMessageView.showFinalResultMsg("Draw!");
+
+      // Set game state to ended
+      gameState.hasEnded = true;
+   } else {
+      // Dealer wins
+      totalScoreView.updateTotalScore(playerState.totalScore);
+
+      // Show final result message
+      resultMessageView.showFinalResultMsg("You Lost!");
+
+      // Set game state to ended
+      gameState.hasEnded = true;
+   }
+};
+
 export const controlInitialBet = async () => {
    // Only allow player to bet if they has already placed a bet
    if (playerState.totalBets === 0) {
@@ -227,4 +263,10 @@ export const controlStandGame = async () => {
       createAndRenderDealerCard();
       await wait(GENERATE_CARD_DELAY);
    }
+
+   // Decide winner
+   decideWinnerAfterStand();
+
+   // Clean up after the round ends
+   await cleanUpAfterRoundEnd();
 };
