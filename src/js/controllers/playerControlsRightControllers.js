@@ -240,6 +240,15 @@ const decideWinnerAfterStand = () => {
    }
 };
 
+const flipDealerSecondCard = async () => {
+   // Flip the second card of the dealer
+   dealerCardView.flipSecondCard();
+
+   // Show and update the total score of the dealer
+   updateAndShowPlayerTotalCardsScore(dealerState, dealerCardsScoreView);
+   await wait(GENERATE_CARD_DELAY);
+};
+
 export const controlInitialBet = async () => {
    // Only allow player to bet if they has already placed a bet
    if (playerState.totalBets === 0) {
@@ -282,6 +291,10 @@ export const controlHitNewCard = async () => {
       // Set game state to ended
       gameState.hasEnded = true;
 
+      // Flip the second card of the dealer
+      await wait(GENERATE_CARD_DELAY);
+      await flipDealerSecondCard();
+
       // Show final result message
       resultMessageView.showFinalResultMsg("Busted!");
 
@@ -292,11 +305,7 @@ export const controlHitNewCard = async () => {
 
 export const controlStandGame = async () => {
    // Flip the second card of the dealer
-   dealerCardView.flipSecondCard();
-
-   // Show and update the total score of the dealer
-   updateAndShowPlayerTotalCardsScore(dealerState, dealerCardsScoreView);
-   await wait(GENERATE_CARD_DELAY);
+   await flipDealerSecondCard();
 
    // Hit another card for the dealer until the total score is greater than or equal to 17
    while (dealerState.totalCardsScore < 17) {
