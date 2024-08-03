@@ -223,6 +223,38 @@ const createAndRenderDealerCard = (option = {}) => {
    });
 };
 
+const updateTotalScoresAfterRoundEnd = () => {
+   // Update total score display on UI
+   totalScoreView.updateTotalScore(playerState.totalScore);
+   // Set game state to ended
+   gameState.hasEnded = true;
+};
+
+const decideWinnerForBlackjack = async () => {
+   if (playerState.totalCardsScore === 21 && dealerState.totalCardsScore !== 21) {
+      // Flip the second card of the dealer
+      await flipDealerSecondCard();
+      // Player Blackjack
+      playerState.totalScore += playerState.totalBets * 2.5;
+      // Show final result message
+      resultMessageView.showFinalResultMsg("Blackjack!");
+   } else if (dealerState.totalCardsScore === 21 && playerState.totalCardsScore !== 21) {
+      // Dealer Blackjack
+      // Flip the second card of the dealer
+      await flipDealerSecondCard();
+      // Show final result message
+      resultMessageView.showFinalResultMsg("You Lost!");
+   } else if (playerState.totalCardsScore === 21 && dealerState.totalCardsScore === 21) {
+      // Draw (Both dealer and player Blackjack)
+      playerState.totalScore += playerState.totalBets;
+      // Show final result message
+      resultMessageView.showFinalResultMsg("Draw!");
+   } else {
+      return;
+   }
+   updateTotalScoresAfterRoundEnd();
+};
+
 const decideWinnerAfterStand = () => {
    if (
       dealerState.totalCardsScore > 21 ||
@@ -230,33 +262,19 @@ const decideWinnerAfterStand = () => {
    ) {
       // Player wins
       playerState.totalScore += playerState.totalBets * 2;
-      totalScoreView.updateTotalScore(playerState.totalScore);
-
       // Show final result message
-      resultMessageView.showFinalResultMsg("You Win!");
-
-      // Set game state to ended
-      gameState.hasEnded = true;
+      resultMessageView.showFinalResultMsg("You Won!");
    } else if (playerState.totalCardsScore === dealerState.totalCardsScore) {
       // Draw
       playerState.totalScore += playerState.totalBets;
-      totalScoreView.updateTotalScore(playerState.totalScore);
-
       // Show final result message
       resultMessageView.showFinalResultMsg("Draw!");
-
-      // Set game state to ended
-      gameState.hasEnded = true;
    } else {
       // Dealer wins
-      totalScoreView.updateTotalScore(playerState.totalScore);
-
       // Show final result message
       resultMessageView.showFinalResultMsg("You Lost!");
-
-      // Set game state to ended
-      gameState.hasEnded = true;
    }
+   updateTotalScoresAfterRoundEnd();
 };
 
 const flipDealerSecondCard = async () => {
@@ -282,13 +300,13 @@ export const controlInitialBet = async () => {
    await animateBtnsAfterBetPlaced();
 
    // FOR TESTING PURPOSES
-   createAndRenderCustomPlayerCard(1, 1);
-   createAndRenderCustomPlayerCard(1, 1);
+   // createAndRenderCustomPlayerCard(1, 1);
+   // createAndRenderCustomPlayerCard(4, 10);
 
    for (let i = 0; i < INITIAL_GENERATE_CARD_COUNT; i++) {
       // Create and save cards for both player and dealer
       // For Player (Comment out for testing purposes)
-      // createAndRenderPlayerCard();
+      createAndRenderPlayerCard();
 
       // For Dealer
       // Render the second card of the dealer with the back side
@@ -300,6 +318,12 @@ export const controlInitialBet = async () => {
       // Delay after rendering each card for both player and dealer
       await wait(GENERATE_CARD_DELAY);
    }
+
+   // Decide winner for Blackjack
+   await decideWinnerForBlackjack();
+
+   // Clean up after the round ends
+   await cleanUpAfterRoundEnd();
 };
 
 export const controlHitNewCard = async () => {
