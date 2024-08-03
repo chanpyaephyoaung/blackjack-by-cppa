@@ -154,9 +154,10 @@ const cleanUpAfterRoundEnd = async () => {
    // Reset player bet chip list history
    playerState.betChipListHistory = [];
 
-   // Reset both player and dealer card list history
+   // Reset both player, dealer and card deck card list history
    playerState.cardListHistory = [];
    dealerState.cardListHistory = [];
+   cardDeck.generatedCardsHistory = [];
 
    // Reset game states
    gameState.hasEnded = false;
