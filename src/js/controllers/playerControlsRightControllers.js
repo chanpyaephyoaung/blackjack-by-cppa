@@ -20,6 +20,7 @@ import { cardDeck } from "../models/cardDeck";
 import { GENERATE_CARD_DELAY } from "../config/animationConfig";
 import { INITIAL_GENERATE_CARD_COUNT, TOTAL_CARDS_NUM } from "../config/cardConfig";
 import { CLEAN_UP_BTNS_AFTER_FINAL_RESULT_DELAY } from "../config/animationConfig";
+import { TYPE_PLAYER, TYPE_DEALER } from "../config/generalConfig.js";
 
 export const controlPlayerControlsRightInitialBtns = async () => {
    const initialBtns = [
@@ -121,16 +122,27 @@ const cleanUpAfterRoundEnd = async () => {
    // Delay before cleaning up after the final result message
    await wait(CLEAN_UP_BTNS_AFTER_FINAL_RESULT_DELAY);
 
-   // Clear the play buttons
-   await playerControlsRightBtnsView.removeBtns(["hit", "stand"]);
-   await playerControlsLeftBtnsView.removeBtns(["double-down"]);
+   // Clear the card decks
+   // For Player
+   await playerCardView.clearCardDeck(TYPE_PLAYER);
+   playerCardView.clearCards(TYPE_PLAYER);
+   playerCardsScoreView.hideCardsScore();
+
+   // For Dealer
+   await dealerCardView.clearCardDeck(TYPE_DEALER);
+   dealerCardView.clearCards(TYPE_DEALER);
+   dealerCardsScoreView.hideCardsScore();
+
+   // Clear the play buttons and bet area chips
+   await Promise.all([
+      playerControlsRightBtnsView.removeBtns(["hit", "stand"]),
+      playerControlsLeftBtnsView.removeBtns(["double-down"]),
+      betAreaChipsView.clearBetAreaChips(),
+   ]);
 
    // Set total bets to 0
    playerState.totalBets = 0;
    totalBetView.updateTotalBetsVal(0);
-
-   // Clear the bets in UI with animation
-   await betAreaChipsView.clearBetAreaChips();
 
    // Reset player bet history
    playerState.betChipListHistory = [];
@@ -140,7 +152,7 @@ const createAndRenderPlayerCard = () => {
    // Create and save card for player
    const generatedPlayerCard = createAndSaveCard(
       cardDeck.generatedCardsHistory,
-      "player",
+      TYPE_PLAYER,
       playerState.cardListHistory
    );
    if (!generatedPlayerCard) return;
@@ -156,7 +168,7 @@ const createAndRenderDealerCard = (option = {}) => {
    // Create and save card for dealer
    const generatedDealerCard = createAndSaveCard(
       cardDeck.generatedCardsHistory,
-      "dealer",
+      TYPE_DEALER,
       dealerState.cardListHistory
    );
    if (!generatedDealerCard) return;

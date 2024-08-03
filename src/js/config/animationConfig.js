@@ -11,6 +11,9 @@ export const CLEAN_UP_BTNS_AFTER_FINAL_RESULT_DELAY = 3500;
 // Bet Area Chips
 export const BET_AREA_CHIPS_CLEAR_DURATION = 50;
 
+// Card Deck
+export const CARD_DECK_DISAPPEAR_DURATION = 150;
+
 // Cards
 export const GENERATE_CARD_DELAY = 500;
 

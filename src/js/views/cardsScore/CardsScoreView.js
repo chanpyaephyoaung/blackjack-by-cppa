@@ -7,9 +7,13 @@ export default class CardsScoreView {
       this._containerEl.textContent = score;
    }
 
+   hideCardsScore() {
+      this._containerEl.classList.add("hidden");
+      this._containerEl.textContent = 0;
+   }
+
    async animateCardsScore() {
       this._containerEl.style.animation = `scaleCardScoreBox ${CARDS_SCORE_ANIMATION_DURATION}ms ease-in forwards`;
-
       await wait(CARDS_SCORE_ANIMATION_DURATION);
       this._containerEl.style.animation = "";
    }
