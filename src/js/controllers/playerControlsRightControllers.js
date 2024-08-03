@@ -22,7 +22,7 @@ import { INITIAL_GENERATE_CARD_COUNT, TOTAL_CARDS_NUM } from "../config/cardConf
 import { CLEAN_UP_BTNS_AFTER_FINAL_RESULT_DELAY } from "../config/animationConfig";
 import { TYPE_PLAYER, TYPE_DEALER } from "../config/generalConfig.js";
 
-export const controlPlayerControlsRightInitialBtns = async () => {
+const addInitialBtns = async () => {
    const initialBtns = [
       {
          type: "bet",
@@ -34,8 +34,11 @@ export const controlPlayerControlsRightInitialBtns = async () => {
       },
    ];
 
-   //  await playerControlsRightView.render(initialBtns);
    await playerControlsRightBtnsView.addBtn(initialBtns);
+};
+
+export const controlPlayerControlsRightInitialBtns = async () => {
+   await addInitialBtns();
 };
 
 export const controlResetBets = async () => {
@@ -144,8 +147,23 @@ const cleanUpAfterRoundEnd = async () => {
    playerState.totalBets = 0;
    totalBetView.updateTotalBetsVal(0);
 
-   // Reset player bet history
+   // Set total player and dealer card scores to 0
+   playerState.totalCardsScore = 0;
+   dealerState.totalCardsScore = 0;
+
+   // Reset player bet chip list history
    playerState.betChipListHistory = [];
+
+   // Reset both player and dealer card list history
+   playerState.cardListHistory = [];
+   dealerState.cardListHistory = [];
+
+   // Reset game states
+   gameState.hasEnded = false;
+   betState.isBetPlaced = false;
+
+   // Show the initial play controls right buttons
+   await addInitialBtns();
 };
 
 const createAndRenderPlayerCard = () => {
