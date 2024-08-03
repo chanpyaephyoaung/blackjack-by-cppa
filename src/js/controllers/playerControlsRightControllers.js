@@ -63,7 +63,6 @@ export const controlResetBets = async () => {
 };
 
 const createAndSaveCard = (cardDeckHistory, playerType, playerTypeCardHistory) => {
-   // Create card
    let { type, card } = generateRandCard(playerType);
    if (cardDeckHistory.length > 0) {
       // Check if the card is already in the card deck history. Change another if true
@@ -72,6 +71,7 @@ const createAndSaveCard = (cardDeckHistory, playerType, playerTypeCardHistory) =
             alertView.showAlert("Card Deck Limit Reached!");
             return;
          } else {
+            // COMMENT OUT FOR TESTING PURPOSES
             type = generateRandCard(playerType).type;
             card = generateRandCard(playerType).card;
          }
@@ -165,6 +165,24 @@ const cleanUpAfterRoundEnd = async () => {
 
    // Show the initial play controls right buttons
    await addInitialBtns();
+};
+
+// For TESTING PURPOSES
+const createAndRenderCustomPlayerCard = (suit, value) => {
+   const playerType = TYPE_PLAYER;
+   const playerCard = {
+      id: `${value}-${suit}`,
+      value,
+      suit,
+   };
+
+   // Save card
+   playerState.cardListHistory.push(playerCard);
+
+   // Update and show player's total cards score
+   updateAndShowPlayerTotalCardsScore(playerState, playerCardsScoreView);
+
+   playerCardView.render({ type: playerType, card: playerCard, stale: false });
 };
 
 const createAndRenderPlayerCard = () => {
@@ -263,10 +281,13 @@ export const controlInitialBet = async () => {
    // Animate the play buttons when the bet is placed
    await animateBtnsAfterBetPlaced();
 
+   createAndRenderCustomPlayerCard(1, 1);
+   createAndRenderCustomPlayerCard(2, 1);
+
    for (let i = 0; i < INITIAL_GENERATE_CARD_COUNT; i++) {
       // Create and save cards for both player and dealer
-      // For Player
-      createAndRenderPlayerCard();
+      // For Player (Comment out for testing purposes)
+      // createAndRenderPlayerCard();
 
       // For Dealer
       // Render the second card of the dealer with the back side
