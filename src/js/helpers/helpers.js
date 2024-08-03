@@ -55,23 +55,18 @@ export const generateRandCard = (type) => {
 };
 
 export const updateCardsTotalScore = (scoreList) => {
-   let updatedScoreForFaceCards = scoreList;
-   // Set face card values to 10 if the scorelist contain face card/s
-   if (scoreList.some((score) => score > 10)) {
-      updatedScoreForFaceCards = scoreList.map((score) => (score > 10 ? 10 : score));
-   }
-   // Handle aces (value 1 can be 11 if it doesn't cause a bust)
-   if (scoreList.includes(1) && sumArrVals(updatedScoreForFaceCards) + 10 <= 21) {
-      updatedScoreForFaceCards = updatedScoreForFaceCards.map((score) =>
-         score === 1 ? 11 : score
-      );
-   }
-   // Handle the scenario where having 11 (Ace as 11) causes a bust
-   if (scoreList.includes(11) && sumArrVals(updatedScoreForFaceCards) > 21) {
-      updatedScoreForFaceCards = updatedScoreForFaceCards.map((score) =>
-         score === 11 ? 1 : score
-      );
+   // Convert face cards (J, Q, K) to 10
+   let updatedScoreForFaceCards = scoreList.map((score) => (score > 10 ? 10 : score));
+
+   // Calculate the total score considering the Aces
+   let totalScore = sumArrVals(updatedScoreForFaceCards);
+   let aceCount = updatedScoreForFaceCards.filter((score) => score === 1).length;
+
+   // Handle Aces: convert them to 11 if it doesn't cause a bust
+   while (aceCount > 0 && totalScore + 10 <= 21) {
+      totalScore += 10; // Convert Ace from 1 to 11
+      aceCount--;
    }
 
-   return sumArrVals(updatedScoreForFaceCards);
+   return totalScore;
 };

@@ -281,8 +281,9 @@ export const controlInitialBet = async () => {
    // Animate the play buttons when the bet is placed
    await animateBtnsAfterBetPlaced();
 
+   // FOR TESTING PURPOSES
    createAndRenderCustomPlayerCard(1, 1);
-   createAndRenderCustomPlayerCard(2, 1);
+   createAndRenderCustomPlayerCard(1, 1);
 
    for (let i = 0; i < INITIAL_GENERATE_CARD_COUNT; i++) {
       // Create and save cards for both player and dealer
