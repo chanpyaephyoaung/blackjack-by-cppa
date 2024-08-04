@@ -237,25 +237,27 @@ const decideWinnerForBlackjack = async () => {
       // Player Blackjack
       playerState.totalScore += playerState.totalBets * 2.5;
       // Show final result message
-      resultMessageView.showFinalResultMsg("Blackjack!");
+      await resultMessageView.showFinalResultMsg("Blackjack!");
+      updateTotalScoresAfterRoundEnd();
    } else if (dealerState.totalCardsScore === 21 && playerState.totalCardsScore !== 21) {
       // Dealer Blackjack
       // Flip the second card of the dealer
       await flipDealerSecondCard();
       // Show final result message
-      resultMessageView.showFinalResultMsg("You Lost!");
+      await resultMessageView.showFinalResultMsg("You Lost!");
+      updateTotalScoresAfterRoundEnd();
    } else if (playerState.totalCardsScore === 21 && dealerState.totalCardsScore === 21) {
       // Draw (Both dealer and player Blackjack)
       playerState.totalScore += playerState.totalBets;
       // Show final result message
-      resultMessageView.showFinalResultMsg("Draw!");
+      await resultMessageView.showFinalResultMsg("Draw!");
+      updateTotalScoresAfterRoundEnd();
    } else {
       return;
    }
-   updateTotalScoresAfterRoundEnd();
 };
 
-const decideWinnerAfterStand = () => {
+const decideWinnerAfterStand = async () => {
    if (
       dealerState.totalCardsScore > 21 ||
       playerState.totalCardsScore > dealerState.totalCardsScore
@@ -263,16 +265,16 @@ const decideWinnerAfterStand = () => {
       // Player wins
       playerState.totalScore += playerState.totalBets * 2;
       // Show final result message
-      resultMessageView.showFinalResultMsg("You Won!");
+      await resultMessageView.showFinalResultMsg("You Won!");
    } else if (playerState.totalCardsScore === dealerState.totalCardsScore) {
       // Draw
       playerState.totalScore += playerState.totalBets;
       // Show final result message
-      resultMessageView.showFinalResultMsg("Draw!");
+      await resultMessageView.showFinalResultMsg("Draw!");
    } else {
       // Dealer wins
       // Show final result message
-      resultMessageView.showFinalResultMsg("You Lost!");
+      await resultMessageView.showFinalResultMsg("You Lost!");
    }
    updateTotalScoresAfterRoundEnd();
 };
@@ -323,7 +325,7 @@ export const controlInitialBet = async () => {
    await decideWinnerForBlackjack();
 
    // Clean up after the round ends
-   await cleanUpAfterRoundEnd();
+   if (gameState.hasEnded) await cleanUpAfterRoundEnd();
 };
 
 export const controlHitNewCard = async () => {
@@ -343,7 +345,7 @@ export const controlHitNewCard = async () => {
       await flipDealerSecondCard();
 
       // Show final result message
-      resultMessageView.showFinalResultMsg("Busted!");
+      await resultMessageView.showFinalResultMsg("Busted!");
 
       // Clean up after the round ends
       await cleanUpAfterRoundEnd();
@@ -361,7 +363,7 @@ export const controlStandGame = async () => {
    }
 
    // Decide winner
-   decideWinnerAfterStand();
+   await decideWinnerAfterStand();
 
    // Clean up after the round ends
    await cleanUpAfterRoundEnd();
