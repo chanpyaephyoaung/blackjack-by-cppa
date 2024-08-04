@@ -27,7 +27,7 @@ export default class ButtonView extends View {
       return this._data
          .map(
             (btn) => `
-       <button type="button" class="btn btn--${btn.variant} btn--play btn--${btn.type}">${btn.type}</button>
+       <button type="button" class="btn btn--text-${btn.textSize} btn--${btn.variant} btn--play btn--${btn.type}">${btn.type}</button>
      `
          )
          .join("");

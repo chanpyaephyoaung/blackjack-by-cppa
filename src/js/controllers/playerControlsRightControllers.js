@@ -27,10 +27,12 @@ const addInitialBtns = async () => {
       {
          type: "bet",
          variant: "primary",
+         textSize: "reg",
       },
       {
          type: "reset",
          variant: "danger",
+         textSize: "reg",
       },
    ];
 
@@ -94,10 +96,12 @@ const animateBtnsAfterBetPlaced = async () => {
       {
          type: "hit",
          variant: "primary",
+         textSize: "reg",
       },
       {
          type: "stand",
          variant: "danger",
+         textSize: "reg",
       },
    ];
 
@@ -108,6 +112,7 @@ const animateBtnsAfterBetPlaced = async () => {
       {
          type: "double-down",
          variant: "secondary",
+         textSize: "sm",
       },
    ];
 
