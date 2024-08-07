@@ -358,6 +358,7 @@ export const controlHitNewCard = async () => {
 };
 
 export const controlStandGame = async () => {
+   console.log("Stand Game!");
    // Flip the second card of the dealer
    await flipDealerSecondCard();
 
