@@ -8,8 +8,8 @@ A feature-rich BlackJack card game built using vanilla JavaScript, SCSS, and des
 
 ## Table of Contents
 
--  [Installation](#installation)
 -  [Features](#features)
+-  [Installation](#installation)
 -  [Project Structure](#project-structure)
 -  [Acknowledgements](#contributing)
 
