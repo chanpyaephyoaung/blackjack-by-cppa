@@ -1,23 +1,15 @@
 import betAreaChipsView from "../views/betArea/betAreaChipsView";
 import totalBetView from "../views/totalBet/totalBetView";
 import totalScoreView from "../views/totalScore/totalScoreView";
-import playerCardView from "../views/cards/playerCardView";
-import dealerCardView from "../views/cards/dealerCardView";
-import playerControlsRightView from "../views/playerControls/playerControlsRightView";
 import alertView from "../views/alert/alertView";
 import resultMessageView from "../views/resultMessage/resultMessageView";
-import playerCardsScoreView from "../views/cardsScore/playerCardsScoreView";
-import dealerCardsScoreView from "../views/cardsScore/dealerCardsScoreView";
-import playerControlsRightBtnsView from "../views/buttons/playerControlsRightBtnsView";
-import playerControlsLeftBtnsView from "../views/buttons/playerControlsLeftBtnsView";
 import { wait } from "../helpers/helpers";
-import { generateRandCard, wait, sumArrVals, updateCardsTotalScore } from "../helpers/helpers";
 import { playerState } from "../models/playerState";
 import { dealerState } from "../models/dealerState";
 import { betState } from "../models/chipsState";
 import { gameState } from "../models/gameState";
 import { GENERATE_CARD_DELAY } from "../config/animationConfig";
-import { INITIAL_GENERATE_CARD_COUNT, TOTAL_CARDS_NUM } from "../config/cardConfig";
+import { INITIAL_GENERATE_CARD_COUNT } from "../config/cardConfig";
 import { addInitialBtns } from "../helpers/buttonHelpers";
 import { animateBtnsAfterBetPlaced } from "../helpers/buttonHelpers";
 import {

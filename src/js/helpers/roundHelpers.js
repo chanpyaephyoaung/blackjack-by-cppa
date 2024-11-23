@@ -113,3 +113,31 @@ export const decideWinnerAfterStand = async () => {
    }
    updateTotalScoresAfterRoundEnd();
 };
+
+export const decideWinnerAfterDoubleDown = async () => {
+   if (playerState.totalCardsScore > 21) {
+      // Dealer wins
+      playerState.totalScore -= playerState.totalBets / 2;
+      // Show final result message
+      await resultMessageView.showFinalResultMsg("Busted!");
+   } else if (
+      dealerState.totalCardsScore > 21 ||
+      playerState.totalCardsScore > dealerState.totalCardsScore
+   ) {
+      // Player wins
+      playerState.totalScore += (playerState.totalBets / 2) * 2;
+      // Show final result message
+      await resultMessageView.showFinalResultMsg("You Won!");
+   } else if (playerState.totalCardsScore === dealerState.totalCardsScore) {
+      // Draw
+      playerState.totalScore += playerState.totalBets / 2;
+      // Show final result message
+      await resultMessageView.showFinalResultMsg("Draw!");
+   } else {
+      // Dealer wins
+      playerState.totalScore -= playerState.totalBets / 2;
+      // Show final result message
+      await resultMessageView.showFinalResultMsg("You Lost!");
+   }
+   updateTotalScoresAfterRoundEnd();
+};
